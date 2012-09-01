@@ -6,17 +6,14 @@ package scala.tools.partest
 package nest
 
 import scala.tools.nsc.Properties.{ setProp, propOrEmpty, propOrNone, propOrElse }
-import scala.tools.nsc.util.ClassPath
-import scala.tools.nsc.io
-import io.{ Path, File, Directory }
 
 object PathSettings {
   import PartestDefaults.{ testRootDir, srcDirName }
 
   private def cwd = Directory.Current getOrElse sys.error("user.dir property not set")
   private def isPartestDir(d: Directory) = (d.name == "test") && (d / srcDirName isDirectory)
-  private def findJar(d: Directory, name: String): Option[File] = findJar(d.files, name)
-  private def findJar(files: Iterator[File], name: String): Option[File] =
+  private def findJar(d: Directory, name: String): Option[SFile] = findJar(d.files, name)
+  private def findJar(files: Iterator[SFile], name: String): Option[SFile] =
     files filter (_ hasExtension "jar") find { _.name startsWith name }
 
   // Directory <root>/test
@@ -35,20 +32,20 @@ object PathSettings {
   // Directory <root>/test/files/speclib
   lazy val srcSpecLibDir = Directory(srcDir / "speclib")
 
-  lazy val srcSpecLib: File = findJar(srcSpecLibDir, "instrumented") getOrElse {
+  lazy val srcSpecLib: SFile = findJar(srcSpecLibDir, "instrumented") getOrElse {
     sys.error("No instrumented.jar found in %s".format(srcSpecLibDir))
   }
 
   // Directory <root>/test/files/codelib
   lazy val srcCodeLibDir = Directory(srcDir / "codelib")
 
-  lazy val srcCodeLib: File = (
+  lazy val srcCodeLib: SFile = (
     findJar(srcCodeLibDir, "code")
       orElse findJar(Directory(testRoot / "files" / "codelib"), "code") // work with --srcpath pending
       getOrElse sys.error("No code.jar found in %s".format(srcCodeLibDir))
   )
 
-  lazy val instrumentationAgentLib: File = {
+  lazy val instrumentationAgentLib: SFile = {
     findJar(buildPackLibDir.files, "scala-partest-javaagent") getOrElse {
       sys.error("No partest-javaagent jar found in '%s' or '%s'".format(buildPackLibDir, srcLibDir))
     }
@@ -67,12 +64,8 @@ object PathSettings {
   // Directory <root>/build/pack/lib
   lazy val buildPackLibDir = Directory(buildDir / "pack" / "lib")
 
-  lazy val scalaCheck: File =
+  lazy val scalaCheck: SFile =
     findJar(buildPackLibDir.files ++ srcLibDir.files, "scalacheck") getOrElse {
       sys.error("No scalacheck jar found in '%s' or '%s'".format(buildPackLibDir, srcLibDir))
     }
-}
-
-class PathSettings() {
-  // def classpathAsURLs: List[URL]
 }

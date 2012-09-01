@@ -3,54 +3,18 @@
  * @author Philipp Haller
  */
 
-// $Id$
+
 
 package scala.tools.partest
 package nest
 
-import java.io.{File, FilenameFilter, IOException, StringWriter,
+import java.io.{ FilenameFilter, IOException,
                 FileInputStream, FileOutputStream, BufferedReader,
                 FileReader, PrintWriter, FileWriter}
 import java.net.URI
-import scala.tools.nsc.io.{ Path, Directory, File => SFile }
 import scala.collection.mutable
 
-trait FileUtil {
-  /**
-   * Compares two files using a Java implementation of the GNU diff
-   * available at http://www.bmsi.com/java/#diff.
-   *
-   * @param  f1  the first file to be compared
-   * @param  f2  the second file to be compared
-   * @return the text difference between the compared files
-   */
-  def compareFiles(f1: File, f2: File): String = {
-    val diffWriter = new StringWriter
-    val args = Array(f1.getAbsolutePath(), f2.getAbsolutePath())
-
-    DiffPrint.doDiff(args, diffWriter)
-    val res = diffWriter.toString
-    if (res startsWith "No") "" else res
-  }
-  def compareContents(lines1: Seq[String], lines2: Seq[String]): String = {
-    val xs1 = lines1.toArray[AnyRef]
-    val xs2 = lines2.toArray[AnyRef]
-
-    val diff   = new Diff(xs1, xs2)
-    val change = diff.diff_2(false)
-    val writer = new StringWriter
-    val p      = new DiffPrint.NormalPrint(xs1, xs2, writer)
-
-    p.print_script(change)
-    val res = writer.toString
-    if (res startsWith "No ") ""
-    else res
-  }
-}
-object FileUtil extends FileUtil { }
-
-trait FileManager extends FileUtil {
-
+trait FileManager {
   def testRootDir: Directory
   def testRootPath: String
 
@@ -64,14 +28,30 @@ trait FileManager extends FileUtil {
   var LATEST_PARTEST: String
   var LATEST_ACTORS: String
 
-  var showDiff = false
   var updateCheck = false
-  var showLog = false
   var failed = false
 
-  var SCALAC_OPTS = PartestDefaults.scalacOpts.split(' ').toSeq
-  var JAVA_OPTS   = PartestDefaults.javaOpts
-  var timeout     = PartestDefaults.timeout
+  var SCALAC_OPTS: Seq[String] = words(PartestDefaults.scalacOpts)
+  var JAVA_OPTS                 = PartestDefaults.javaOpts
+
+  def universalJavaOpts   = words(JAVA_OPTS)
+  def universalScalacOpts = SCALAC_OPTS
+  def universalClasspath  = CLASSPATH
+
+  def updatePluginPath(options: List[String]): List[String] = {
+    def absolutize(path: String) = Path(path) match {
+      case x if x.isAbsolute  => x.path
+      case x                  => (testRootDir / x).toAbsolute.path
+    }
+    options partition (_ startsWith "-Xplugin:") match {
+      case (Nil, _)     => options
+      case (opt1, opt2) =>
+        val plugins      = opt1 map (_ stripPrefix "-Xplugin:") flatMap (_ split pathSeparator) map absolutize
+        val pluginOption = "-Xplugin:" + (plugins mkString pathSeparator)
+
+        opt2 :+ pluginOption
+    }
+  }
 
   /** Only when --debug is given. */
   lazy val testTimings = new mutable.HashMap[String, Long]
@@ -103,18 +83,8 @@ trait FileManager extends FileUtil {
     }
     else {
       val to = if (dest.isDirectory) new File(dest, from.getName) else dest
-
-      try {
-        SFile(to) writeAll SFile(from).slurp()
-        true
-      }
+      try { to writeAll from.fileContents ; true }
       catch { case _: IOException => false }
     }
-  }
-
-  def mapFile(file: File, replace: String => String) {
-    val f = SFile(file)
-
-    f.printlnAll(f.lines.toList map replace: _*)
   }
 }

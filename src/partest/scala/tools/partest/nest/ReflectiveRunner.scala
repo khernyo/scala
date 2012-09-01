@@ -33,9 +33,9 @@ class ReflectiveRunner {
 
   def main(args: String) {
     val argList = (args.split("\\s")).toList
-
-    if (isPartestDebug)
-      showAllJVMInfo
+    //
+    // if (isPartestDebug)
+    //   showAllJVMInfo
 
     // find out which build to test
     val buildPath = searchPath("--buildpath", argList)
@@ -62,10 +62,10 @@ class ReflectiveRunner {
     // when that bug is fixed, this paragraph of code can be safely removed
     // we hack into the classloader that will become parent classloader for scalac
     // this way we ensure that reflective macro lookup will pick correct Code.lift
-    sepLoader = new URLClassLoader((PathSettings.srcCodeLib +: files) map (_.toURL), null)
-
-    if (isPartestDebug)
-      println("Loading classes from:\n" + sepUrls.mkString("\n"))
+    sepLoader = new URLClassLoader((PathSettings.srcCodeLib +: files distinct) map (_.toURL), null)
+    //
+    // if (isPartestDebug)
+    //   println("Loading classes from:\n" + sepUrls.mkString("\n"))
 
     // @partest maintainer: it seems to me that commented lines are incorrect
     // if classPath is not empty, then it has been provided by the --classpath option
@@ -85,10 +85,10 @@ class ReflectiveRunner {
     // don't let partest find pluginsdir; in ant build, standard plugin has dedicated test suite
     //setProp("scala.home", latestLibFile.parent.parent.path)
     setProp("scala.home", "")
-
-    if (isPartestDebug)
-      for (prop <- List("java.class.path", "sun.boot.class.path", "java.ext.dirs"))
-        println(prop + ": " + propOrEmpty(prop))
+    //
+    // if (isPartestDebug)
+    //   for (prop <- List("java.class.path", "sun.boot.class.path", "java.ext.dirs"))
+    //     println(prop + ": " + propOrEmpty(prop))
 
     try {
       val sepRunnerClass  = sepLoader loadClass sepRunnerClassName
