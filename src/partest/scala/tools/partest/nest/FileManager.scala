@@ -50,6 +50,75 @@ trait FileUtil {
 }
 object FileUtil extends FileUtil { }
 
+object TestKind extends Enumeration {
+  val Scalacheck   = Value("scalacheck")
+  val Pos          = Value("pos")
+  val Neg          = Value("neg")
+  val Run          = Value("run")
+  val Jvm          = Value("jvm")
+  val Specialized  = Value("specialized")
+  val Instrumented = Value("instrumented")
+  val Presentation = Value("presentation")
+  val Ant          = Value("ant")
+  val Buildmanager = Value("buildmanager")
+  val Res          = Value("res")
+  val Shootout     = Value("shootout")
+  val Scalap       = Value("scalap")
+  val Script       = Value("script")
+
+  def expectsFailure(v: Value) = v match {
+    case Neg => true
+    case _   => false
+  }
+}
+
+class TestContext(val testFile: File, val kind: TestKind.Value) {
+
+  def this(testFile: File, kind: String) = this(testFile, TestKind.withName(kind))
+
+  val dir: File = testFile.getParentFile
+  val fileBase: String = basename(testFile.getName)
+
+  val logFile = new File(dir, s"$fileBase-$kind.log")
+  val log     = SFile(logFile).printWriter()  // FIXME Writing into this will never fail, not even after close(). Replace with something more bloody.
+  val parent  = testFile.getParentFile
+  val outDir  = new File(parent, s"$fileBase-$kind.obj")
+
+  def expectFailure = TestKind.expectsFailure(kind)
+
+  def createOutputDir(): File = {
+    outDir.mkdirs()
+    outDir
+  }
+
+  def logFileExists: Boolean = logFile.canRead
+
+  def checkFile: File = ???
+  def checkFileExists: Boolean = ???
+
+  def getCheckFilePath(kind: TestKind.Value): SFile = getCheckFilePath(kind.toString)
+  def getCheckFilePath(suffix: String = ""): SFile = {
+    def chkFile(s: String) = (Directory(dir) / s"${fileBase}$s.check").toFile
+
+    if (chkFile("").isFile || suffix == "") chkFile("")
+    else chkFile("-" + suffix)
+  }
+
+  private def getCheckFile(dir: File) = Some(getCheckFilePath(kind)) filter (_.canRead)
+
+  /**
+   * This will print the contents of the log file to the console after closing [[scala.tools.partest.nest.TestContext#log]]
+   */
+  def outputLogFile() {
+    log.close()
+    val lines = SFile(logFile).lines
+    if (lines.nonEmpty) {
+      NestUI.normal("Log file '" + logFile + "': \n")
+      lines foreach (x => NestUI.normal(x + "\n"))
+    }
+  }
+}
+
 trait FileManager extends FileUtil {
 
   def testRootDir: Directory
@@ -84,19 +153,6 @@ trait FileManager extends FileUtil {
   def showTestTimings() {
     testTimings.toList sortBy (-_._2) foreach { case (k, v) => println("%s: %s".format(k, v)) }
   }
-
-  def getLogFile(dir: File, fileBase: String, kind: String): File =
-    new File(dir, fileBase + "-" + kind + ".log")
-
-  def getLogFile(file: File, kind: String): File = {
-    val dir      = file.getParentFile
-    val fileBase = basename(file.getName)
-
-    getLogFile(dir, fileBase, kind)
-  }
-
-  def logFileExists(file: File, kind: String) =
-    getLogFile(file, kind).canRead
 
   def overwriteFileWith(dest: File, file: File) =
     dest.isFile && copyFile(file, dest)

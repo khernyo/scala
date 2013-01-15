@@ -124,7 +124,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     NestUI.normal("]\n", printer)
   }
 
-  private def javac(outDir: File, files: List[File], output: File): CompilationOutcome = {
+  private def javac(testContext: TestContext, outDir: File, files: List[File], output: File): CompilationOutcome = {
     // compile using command-line javac compiler
     val args = Seq(
       javacCmd,
@@ -135,7 +135,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     ) ++ files.map("" + _)
 
     try if (runCommand(args, output)) CompileSuccess else CompileFailed
-    catch exHandler(output, "javac command failed:\n" + args.map("  " + _ + "\n").mkString + "\n", CompilerCrashed)
+    catch exHandler(testContext, "javac command failed:\n" + args.map("  " + _ + "\n").mkString + "\n", CompilerCrashed)
   }
 
   /** Runs command redirecting standard out and error out to output file.
@@ -167,40 +167,29 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
   @inline private def isScala(f: File) = SFile(f) hasExtension "scala"
   @inline private def isJavaOrScala(f: File) = isJava(f) || isScala(f)
 
-  private def outputLogFile(logFile: File) {
-    val lines = SFile(logFile).lines
-    if (lines.nonEmpty) {
-      NestUI.normal("Log file '" + logFile + "': \n")
-      lines foreach (x => NestUI.normal(x + "\n"))
-    }
-  }
-  private def logStackTrace(logFile: File, t: Throwable, msg: String): Boolean = {
-    SFile(logFile).writeAll(msg, stackTraceString(t))
-    outputLogFile(logFile) // if running the test threw an exception, output log file
+  private def logStackTrace(testContext: TestContext, t: Throwable, msg: String): Boolean = {
+    Seq(msg, stackTraceString(t)) foreach { testContext.log write _ }
+    testContext.outputLogFile() // if running the test threw an exception, output log file
     false
   }
 
-  private def exHandler[T](logFile: File, msg: String, value: T): PartialFunction[Throwable, T] = {
-    case e: Exception => logStackTrace(logFile, e, msg) ; value
+  private def exHandler[T](testContext: TestContext, msg: String, value: T): PartialFunction[Throwable, T] = {
+    case e: Exception => logStackTrace(testContext, e, msg) ; value
   }
 
   class Runner(testFile: File) {
     var testDiff: String = ""
     var passed: Option[Boolean] = None
 
-    val fileBase = basename(testFile.getName)
-    val logFile  = fileManager.getLogFile(testFile, kind)
-    val parent   = testFile.getParentFile
-    val outDir   = new File(parent, "%s-%s.obj".format(fileBase, kind))
+    val testContext = new TestContext(testFile, kind)
+    val fileBase = testContext.fileBase
+    val logFile  = testContext.logFile
+    val parent   = testContext.parent
+    val outDir   = testContext.outDir
     def toDelete = if (isPartestDebug) Nil else List(
       if (passed exists (x => x)) Some(logFile) else None,
       if (outDir.isDirectory) Some(outDir) else None
     ).flatten
-
-    private def createOutputDir(): File = {
-      outDir.mkdirs()
-      outDir
-    }
 
     private def execTest(outDir: File, logFile: File, classpathPrefix: String = "", javaOpts: String = ""): Boolean = {
       // check whether there is a ".javaopts" file
@@ -283,6 +272,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       }
       else diff
     }
+    private def compareOutput(testContext: TestContext): String = compareOutput(testContext.dir, testContext.logFile)
 
     def newTestWriters() = {
       val swr = new StringWriter
@@ -304,24 +294,24 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     /** 1. Creates log file and output directory.
      *  2. Runs script function, providing log file and output directory as arguments.
      */
-    def runInContext(file: File, script: (File, File) => Boolean): (Boolean, LogContext) = {
+    def runInContext(testContext: TestContext, script: (TestContext) => Boolean): (Boolean, LogContext) = {
       val (swr, wr) = newTestWriters()
-      printInfoStart(file, wr)
+      printInfoStart(testContext.testFile, wr)
 
-      NestUI.verbose(this+" running test "+fileBase)
-      val outDir = createOutputDir()
+      NestUI.verbose(this+" running test "+testContext.fileBase)
+      val outDir = testContext.createOutputDir()
       NestUI.verbose("output directory: "+outDir)
 
       // run test-specific code
       val succeeded = try {
         if (isPartestDebug) {
-          val (result, millis) = timed(script(logFile, outDir))
-          fileManager.recordTestTiming(file.getPath, millis)
+          val (result, millis) = timed(script(testContext))
+          fileManager.recordTestTiming(testContext.testFile.getPath, millis)
           result
         }
-        else script(logFile, outDir)
+        else script(testContext)
       }
-      catch exHandler(logFile, "", false)
+      catch exHandler(testContext, "", false)
 
       (succeeded, LogContext(logFile, swr, wr))
     }
@@ -343,7 +333,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
 
         List(1, 2, 3).foldLeft(CompileSuccess: CompilationOutcome) {
           case (CompileSuccess, 1) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), allFiles, kind, logFile)     // java + scala
-          case (CompileSuccess, 2) if javaFiles.nonEmpty  => javac(outDir, javaFiles, logFile)                                    // java
+          case (CompileSuccess, 2) if javaFiles.nonEmpty  => javac(testContext, outDir, javaFiles, logFile)                                    // java
           case (CompileSuccess, 3) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), scalaFiles, kind, logFile)   // scala
           case (outcome, _)                               => outcome
         }
@@ -354,17 +344,17 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       }
     }
 
-    def runTestCommon(file: File, expectFailure: Boolean)(
+    def runTestCommon(testContext: TestContext, file: File)(
       onSuccess: (File, File) => Boolean,
       onFail: (File, File) => Unit = (_, _) => ()): (Boolean, LogContext) =
     {
-      runInContext(file, (logFile: File, outDir: File) => {
+      runInContext(testContext, (testContext: TestContext) => {
         val outcome = (
           if (file.isDirectory) compileFilesIn(file, logFile, outDir)
           else compileMgr.attemptCompile(None, List(file), kind, logFile)
         )
         val result = (
-          if (expectFailure) outcome.isNegative
+          if (testContext.expectFailure) outcome.isNegative
           else outcome.isPositive
         )
 
@@ -374,7 +364,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     }
 
     def runJvmTest(file: File): (Boolean, LogContext) =
-      runTestCommon(file, expectFailure = false)((logFile, outDir) => {
+      runTestCommon(testContext, file)((logFile, outDir) => {
         val dir      = file.getParentFile
 
         // adding codelib.jar to the classpath
@@ -384,7 +374,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
           // cannot replace paths here since this also inverts slashes
           // which affects a bunch of tests
           //fileManager.mapFile(logFile, replaceSlashes(dir, _))
-          diffCheck(file, compareOutput(dir, logFile))
+          diffCheck(file, compareOutput(testContext))
         }
       })
 
@@ -405,7 +395,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       )
 
       try runCommand(cmd, output)
-      catch exHandler(output, "ant command '" + cmd + "' failed:\n", false)
+      catch exHandler(testContext, "ant command '" + cmd + "' failed:\n", false)
     }
 
     def runAntTest(file: File): (Boolean, LogContext) = {
@@ -423,7 +413,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         )
         val args = Array(binary, "-logfile", logFile.path, "-file", file.path)
         NestUI.verbose("ant "+args.mkString(" "))
-        ant(args, logFile) && diffCheck(file, compareOutput(file.getParentFile, logFile))
+        ant(args, logFile) && diffCheck(file, compareOutput(testContext))
       }
       catch { // *catch-all*
         case e: Exception =>
@@ -435,22 +425,22 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     }
 
     def runSpecializedTest(file: File): (Boolean, LogContext) =
-      runTestCommon(file, expectFailure = false)((logFile, outDir) => {
+      runTestCommon(testContext, file)((logFile, outDir) => {
         val dir       = file.getParentFile
 
         // adding the instrumented library to the classpath
         ( execTest(outDir, logFile, PathSettings.srcSpecLib.toString) &&
-          diffCheck(file, compareOutput(dir, logFile))
+          diffCheck(file, compareOutput(testContext))
         )
       })
 
     def runInstrumentedTest(file: File): (Boolean, LogContext) =
-      runTestCommon(file, expectFailure = false)((logFile, outDir) => {
+      runTestCommon(testContext, file)((logFile, outDir) => {
         val dir       = file.getParentFile
 
         // adding the javagent option with path to instrumentation agent
         execTest(outDir, logFile, javaOpts = "-javaagent:"+PathSettings.instrumentationAgentLib) &&
-        diffCheck(file, compareOutput(dir, logFile))
+        diffCheck(file, compareOutput(testContext))
       })
 
     def processSingleFile(file: File): (Boolean, LogContext) = kind match {
@@ -475,25 +465,25 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
             false
           }
         }
-        runTestCommon(file, expectFailure = false)(
+        runTestCommon(testContext, file)(
           succFn,
-          (logFile, outDir) => outputLogFile(logFile)
+          (logFile, outDir) => testContext.outputLogFile()
         )
 
       case "pos" =>
-        runTestCommon(file, expectFailure = false)(
+        runTestCommon(testContext, file)(
           (logFile, outDir) => true,
           (_, _) => ()
         )
 
       case "neg" =>
-        runTestCommon(file, expectFailure = true)((logFile, outDir) => {
+        runTestCommon(testContext, file)((logFile, outDir) => {
           // compare log file to check file
           val dir      = file.getParentFile
 
           // diff is contents of logFile
           fileManager.mapFile(logFile, replaceSlashes(dir, _))
-          diffCheck(file, compareOutput(dir, logFile))
+          diffCheck(file, compareOutput(testContext))
         })
 
       case "run" | "jvm" =>
@@ -519,7 +509,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
             (null, null, null)
           else {
             NestUI.verbose(this+" running test "+fileBase)
-            val outDir = createOutputDir()
+            val outDir = testContext.createOutputDir()
             val testFile = new File(file, fileBase + ".test")
             val changesDir = new File(file, fileBase + ".changes")
 
@@ -624,7 +614,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         }
         fileManager.mapFile(logFile, replaceSlashes(new File(sourcepath), _))
 
-        (diffCheck(file, compareOutput(file, logFile)), LogContext(logFile, swr, wr))
+        (diffCheck(file, compareOutput(testContext.testFile, testContext.logFile)), LogContext(logFile, swr, wr))
 
       case "res" => {
           // simulate resident compiler loop
@@ -635,7 +625,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
 
           NestUI.verbose(this+" running test "+fileBase)
           val dir = file.getParentFile
-          val outDir = createOutputDir()
+          val outDir = testContext.createOutputDir()
           val resFile = new File(dir, fileBase + ".res")
           NestUI.verbose("outDir:  "+outDir)
           NestUI.verbose("logFile: "+logFile)
@@ -694,7 +684,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
           }
           fileManager.mapFile(logFile, replaceSlashes(dir, _))
 
-          (diffCheck(file, compareOutput(dir, logFile)), LogContext(logFile, swr, wr))
+          (diffCheck(file, compareOutput(testContext)), LogContext(logFile, swr, wr))
         }
 
       case "shootout" =>
@@ -702,7 +692,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         printInfoStart(file, wr)
 
         NestUI.verbose(this+" running test "+fileBase)
-        val outDir = createOutputDir()
+        val outDir = testContext.createOutputDir()
 
         // 2. define file {outDir}/test.scala that contains code to compile/run
         val testFile = new File(outDir, "test.scala")
@@ -724,14 +714,14 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         val result = ok && {
           execTest(outDir, logFile) && {
             NestUI.verbose(this+" finished running "+fileBase)
-            diffCheck(file, compareOutput(parent, logFile))
+            diffCheck(file, compareOutput(testContext))
           }
         }
 
         (result, LogContext(logFile, swr, wr))
 
       case "scalap" =>
-        runInContext(file, (logFile: File, outDir: File) => {
+        runInContext(testContext, (testContext: TestContext) => {
           val sourceDir = Directory(if (file.isFile) file.getParent else file)
           val sources   = sourceDir.files filter (_ hasExtension "scala") map (_.jfile) toList
           val results   = sourceDir.files filter (_.name == "result.test") map (_.jfile) toList
@@ -785,7 +775,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
             else file.getAbsolutePath
 
           val ok = runCommand(cmdString+argString, logFile)
-          ( ok && diffCheck(file, compareOutput(file.getParentFile, logFile)) )
+          ( ok && diffCheck(file, compareOutput(testContext)) )
         }
         catch { case e: Exception => NestUI.verbose("caught "+e) ; false }
 
@@ -794,7 +784,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
 
     private def crashContext(t: Throwable): LogContext = {
       try {
-        logStackTrace(logFile, t, "Possible compiler crash during test of: " + testFile + "\n")
+        logStackTrace(testContext, t, "Possible compiler crash during test of: " + testFile + "\n")
         LogContext(logFile)
       }
       catch { case t: Throwable => LogContext(null) }
