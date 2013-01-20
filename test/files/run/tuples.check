@@ -1,3 +1,8 @@
+tuples.scala:7: warning: match may not be exhaustive.
+It would fail on the following inputs: (_, _, false), (_, _, true)
+  xyz match {
+  ^
+one warning found
 (1,abc,true)
 OK
 x = 2; y = xxx; z = 3.14159

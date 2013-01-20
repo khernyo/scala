@@ -1,0 +1,4 @@
+t2333.scala:4: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        lazy val b = try { 2 } catch { case _ => 0 }
+                                            ^
+one warning found

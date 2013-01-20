@@ -1,3 +1,31 @@
+finally.scala:10: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => println(e)
+           ^
+finally.scala:20: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => println("SHOULD NOT GET HERE")
+           ^
+finally.scala:33: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e =>
+           ^
+finally.scala:44: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e =>
+           ^
+finally.scala:55: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e =>
+           ^
+finally.scala:66: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e =>
+           ^
+finally.scala:92: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => println(e)
+           ^
+finally.scala:102: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        try { () } catch { case _ => () }
+                                ^
+finally.scala:114: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => println("COUGHT: " + e)
+           ^
+9 warnings found
 Running throwCatchFinally
 hi
 In Finally

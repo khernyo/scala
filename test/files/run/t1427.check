@@ -1,0 +1,5 @@
+t1427.scala:3: warning: abstract type X in type pattern Bob[_[_] <: Any] is unchecked since it is eliminated by erasure
+    case x: (Bob[X] forSome { type X[_] })  => true
+                    ^
+warning: there were 2 feature warnings; re-run with -feature for details
+two warnings found

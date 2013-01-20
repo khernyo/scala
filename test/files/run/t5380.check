@@ -1,0 +1,13 @@
+t5380.scala:3: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    val f = () => return try { 1 } catch { case _ => 0 }
+                               ^
+t5380.scala:3: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    val f = () => return try { 1 } catch { case _ => 0 }
+                                                     ^
+t5380.scala:3: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    val f = () => return try { 1 } catch { case _ => 0 }
+                                                ^
+t5380.scala:3: warning: enclosing method main has result type Unit: return value discarded
+    val f = () => return try { 1 } catch { case _ => 0 }
+                  ^
+four warnings found

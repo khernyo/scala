@@ -1,0 +1,38 @@
+manifests-old.scala:16: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    def elements = List(ev1 <:< ev2, ev2 <:< ev1)
+                            ^
+manifests-old.scala:16: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    def elements = List(ev1 <:< ev2, ev2 <:< ev1)
+                                         ^
+manifests-old.scala:17: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    def containers = List(ev3 <:< ev4, ev4 <:< ev3)
+                              ^
+manifests-old.scala:17: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    def containers = List(ev3 <:< ev4, ev4 <:< ev3)
+                                           ^
+manifests-old.scala:49: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+  def typeCompare[T, U](implicit ev1: Manifest[T], ev2: Manifest[U]) = (ev1 <:< ev2, ev2 <:< ev1) match {
+                                                                            ^
+manifests-old.scala:49: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+  def typeCompare[T, U](implicit ev1: Manifest[T], ev2: Manifest[U]) = (ev1 <:< ev2, ev2 <:< ev1) match {
+                                                                                         ^
+manifests-old.scala:57: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    manifest[T] <:< manifest[Any],
+                ^
+manifests-old.scala:58: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    manifest[T] <:< manifest[AnyRef],
+                ^
+manifests-old.scala:59: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    !(manifest[T] <:< manifest[AnyVal])
+                  ^
+manifests-old.scala:63: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    manifest[T] <:< manifest[Any],
+                ^
+manifests-old.scala:64: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    !(manifest[T] <:< manifest[AnyRef]),
+                  ^
+manifests-old.scala:65: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    manifest[T] <:< manifest[AnyVal]
+                ^
+warning: there were 7 feature warnings; re-run with -feature for details
+13 warnings found

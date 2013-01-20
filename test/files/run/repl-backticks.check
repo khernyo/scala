@@ -1,2 +1,7 @@
+repl-backticks.scala:3: warning: Test has a main method with parameter type Array[String], but Test will not be a runnable program.
+  Reason: main method must have exact signature (Array[String])Unit
+object Test {
+       ^
+one warning found
 import java.lang.Thread.`yield`
 import scala.`package`.Throwable

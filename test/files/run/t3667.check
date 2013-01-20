@@ -1,3 +1,16 @@
+t3667.scala:58: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Outer1 {
+      ^
+t3667.scala:60: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  class Inner(x: Int = 1)
+        ^
+t3667.scala:64: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Outer2 {
+      ^
+t3667.scala:69: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Outer3 {
+      ^
+four warnings found
 1
 2
 3

@@ -1,0 +1,8 @@
+Test.scala:3: warning: trait Application in package scala is deprecated: use App instead
+object Test extends Application {} 
+                    ^
+one warning found
+Test.scala:3: warning: trait Application in package scala is deprecated: use App instead
+object Test extends Application {} 
+                    ^
+one warning found

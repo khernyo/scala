@@ -1,3 +1,166 @@
+xml01.scala:21: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+    def child = Elem(null, "world", e, sc);
+                ^
+xml01.scala:37: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+  assert(x2p == Elem(null, "book"  , e, sc,
+                ^
+xml01.scala:38: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                     Elem(null, "author", e, sc,Text("Peter Buneman")), 
+                     ^
+xml01.scala:39: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                     Elem(null, "author", e, sc,Text("Dan Suciu")), 
+                     ^
+xml01.scala:40: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                     Elem(null, "title" , e, sc,Text("Data on ze web"))))
+                     ^
+xml01.scala:48: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+  assert(parsedxml1 \ "_" sameElements List(Elem(null,"world", e, sc)))
+                                            ^
+xml01.scala:50: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+  assert(parsedxml1 \ "world"  sameElements List(Elem(null,"world", e, sc)))
+                                                 ^
+xml01.scala:54: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book", e, sc,
+        ^
+xml01.scala:55: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author", e, sc, Text("Peter Buneman")), 
+             ^
+xml01.scala:56: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author", e, sc, Text("Dan Suciu")), 
+             ^
+xml01.scala:57: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title" , e, sc, Text("Data on ze web"))),
+             ^
+xml01.scala:58: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book",e,sc,
+        ^
+xml01.scala:59: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author",e,sc,Text("John Mitchell")),
+             ^
+xml01.scala:60: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title",e,sc,Text("Foundations of Programming Languages"))))
+             ^
+xml01.scala:66: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book",e,sc,
+        ^
+xml01.scala:67: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author", e, sc, Text("Peter Buneman")), 
+             ^
+xml01.scala:68: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author", e, sc, Text("Dan Suciu")), 
+             ^
+xml01.scala:69: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title" , e, sc, Text("Data on ze web"))),
+             ^
+xml01.scala:70: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book",e,sc,
+        ^
+xml01.scala:71: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author", e, sc, Text("John Mitchell")),
+             ^
+xml01.scala:72: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title" , e, sc, Text("Foundations of Programming Languages")))
+             ^
+xml01.scala:78: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+      Elem(null,"author", e, sc, Text("Peter Buneman")), 
+      ^
+xml01.scala:79: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+      Elem(null,"author", e, sc, Text("Dan Suciu")), 
+      ^
+xml01.scala:80: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+      Elem(null,"title" , e, sc, Text("Data on ze web")),
+      ^
+xml01.scala:81: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+      Elem(null,"author", e, sc, Text("John Mitchell")),
+      ^
+xml01.scala:82: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+      Elem(null,"title" , e, sc, Text("Foundations of Programming Languages"))
+      ^
+xml01.scala:88: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("Peter Buneman")), 
+        ^
+xml01.scala:89: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("Dan Suciu")), 
+        ^
+xml01.scala:90: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("John Mitchell"))
+        ^
+xml01.scala:100: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("Peter Buneman")), 
+        ^
+xml01.scala:101: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("Dan Suciu")), 
+        ^
+xml01.scala:102: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author", e, sc, Text("John Mitchell"))
+        ^
+xml01.scala:108: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"title", e, sc, Text("Data on ze web")),
+        ^
+xml01.scala:109: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"title", e, sc, Text("Foundations of Programming Languages")))
+        ^
+xml01.scala:119: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"bib",e,sc,
+        ^
+xml01.scala:120: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"book",e,sc,
+             ^
+xml01.scala:121: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                  Elem(null, "author", e, sc, Text("Peter Buneman")), 
+                  ^
+xml01.scala:122: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                  Elem(null, "author", e, sc, Text("Dan Suciu")), 
+                  ^
+xml01.scala:123: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                  Elem(null, "title" , e, sc, Text("Data on ze web"))),
+                  ^
+xml01.scala:124: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"book",e,sc,
+             ^
+xml01.scala:125: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                  Elem(null,"author",e,sc,Text("John Mitchell")),
+                  ^
+xml01.scala:126: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+                  Elem(null,"title",e,sc,Text("Foundations of Programming Languages")))),
+                  ^
+xml01.scala:127: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book",e,sc,
+        ^
+xml01.scala:128: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author",e,sc,Text("Peter Buneman")), 
+             ^
+xml01.scala:129: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author",e,sc,Text("Dan Suciu")), 
+             ^
+xml01.scala:130: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title",e,sc,Text("Data on ze web"))),
+             ^
+xml01.scala:131: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author",e,sc,Text("Peter Buneman")),
+        ^
+xml01.scala:132: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author",e,sc,Text("Dan Suciu")),
+        ^
+xml01.scala:133: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"title",e,sc,Text("Data on ze web")),
+        ^
+xml01.scala:134: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"book",e,sc,
+        ^
+xml01.scala:135: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"author",e,sc,Text("John Mitchell")),
+             ^
+xml01.scala:136: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+             Elem(null,"title",e,sc,Text("Foundations of Programming Languages"))),
+             ^
+xml01.scala:137: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"author",e,sc,Text("John Mitchell")),
+        ^
+xml01.scala:138: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(null,"title",e,sc,Text("Foundations of Programming Languages"))
+        ^
+54 warnings found
 equality
 xpath \
 xpath \\ DESCENDANTS

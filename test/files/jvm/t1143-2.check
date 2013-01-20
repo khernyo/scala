@@ -1,1 +1,21 @@
+t1143-2.scala:21: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class VarModel[T]( getter: => T, setter: T => Unit )
+      ^
+t1143-2.scala:41: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Printer( p: VarModel[String] ) {
+      ^
+t1143-2.scala:51: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Main {
+      ^
+three warnings found
+t1143-2.scala:21: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class VarModel[T]( getter: => T, setter: T => Unit )
+      ^
+t1143-2.scala:41: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Printer( p: VarModel[String] ) {
+      ^
+t1143-2.scala:51: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Main {
+      ^
+three warnings found
 pass

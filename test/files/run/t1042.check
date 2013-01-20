@@ -1,1 +1,5 @@
+t1042.scala:9: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def toString(sb: StringBuilder): StringBuilder = error("")
+                                                   ^
+one warning found
 B

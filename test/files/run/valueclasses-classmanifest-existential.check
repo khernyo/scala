@@ -1,1 +1,5 @@
+valueclasses-classmanifest-existential.scala:4: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+  println(classManifest[Foo[_]])
+          ^
+one warning found
 Foo[<?>]

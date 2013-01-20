@@ -1,2 +1,6 @@
+classmanifests_new_alias.scala:2: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  type CM[T] = ClassManifest[T]
+               ^
+one warning found
 Int
 true

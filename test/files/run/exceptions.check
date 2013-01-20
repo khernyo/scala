@@ -1,1 +1,11 @@
+exceptions.scala:35: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+            case e => e.getMessage()
+                 ^
+exceptions.scala:9: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        case Empty() => error("KO")
+                        ^
+exceptions.scala:10: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        case _ => error("ok")
+                  ^
+three warnings found
 ok: lookup(2000) = KO

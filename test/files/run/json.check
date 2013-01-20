@@ -1,3 +1,10 @@
+json.scala:10: warning: non-variable type argument String in type pattern Map[String,_] is unchecked since it is eliminated by erasure
+    case m : Map[String,_] => "{" + m.iterator.toList
+             ^
+json.scala:23: warning: non-variable type argument String in type pattern Map[String,_] is unchecked since it is eliminated by erasure
+    case m : Map[String,_] => TreeMap(m.mapValues(sortJSON).iterator.toSeq : _*)
+             ^
+two warnings found
 Passed compare: {"name" : "value"}
 Passed compare: {"name" : "va1ue"}
 Passed compare: {"name" : {"name1" : "va1ue1", "name2" : "va1ue2"}}

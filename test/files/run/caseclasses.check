@@ -1,3 +1,8 @@
+caseclasses.scala:3: warning: case classes without a parameter list have been deprecated;
+use either case objects or case classes with `()' as parameter list.
+case class Bar
+              ^
+one warning found
 OK
 creating C(hi)
 OK

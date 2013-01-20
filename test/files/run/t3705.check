@@ -1,0 +1,4 @@
+t3705.scala:9: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+        Elem(prefix, label, attribs, scope, updateNodes(children) : _*)
+        ^
+one warning found

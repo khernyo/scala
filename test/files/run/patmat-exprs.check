@@ -1,1 +1,3 @@
+warning: there were 4 feature warnings; re-run with -feature for details
+one warning found
 ((5 + 10) + 300)

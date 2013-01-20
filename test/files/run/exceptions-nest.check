@@ -1,3 +1,49 @@
+exceptions-nest.scala:22: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => x = 4
+           ^
+exceptions-nest.scala:34: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        case _ => x = 22
+             ^
+exceptions-nest.scala:39: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => x = 4
+           ^
+exceptions-nest.scala:47: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      try{x = 2} catch { case _ => x = 4 }
+                              ^
+exceptions-nest.scala:50: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => x = 4
+           ^
+exceptions-nest.scala:61: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => x = 4
+           ^
+exceptions-nest.scala:76: warning: This catches all Throwables. If this is really intended, use `case f : Throwable` to clear this warning.
+      case _: NullPointerException => try { x = 3 } catch { case f => throw f }
+                                                                 ^
+exceptions-nest.scala:77: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => x = 4; try { x = 41 } catch { case _: Exception => x = 42 }; x = 43
+           ^
+exceptions-nest.scala:8: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  try { println(test6) } catch { case _ => println("OK") }
+                                      ^
+exceptions-nest.scala:108: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        case _ => x = 5
+             ^
+exceptions-nest.scala:119: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => throw e
+           ^
+exceptions-nest.scala:10: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  try { println(test8) } catch { case _ => println("OK") }
+                                      ^
+exceptions-nest.scala:127: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    }} catch { case _ => 20 }
+                    ^
+exceptions-nest.scala:90: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ =>
+           ^
+exceptions-nest.scala:138: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+    catch { case e => () }
+                 ^
+15 warnings found
 2
 23
 2

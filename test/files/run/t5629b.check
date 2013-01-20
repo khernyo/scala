@@ -1,3 +1,7 @@
+t5629b.scala:36: warning: This catches all Throwables. If this is really intended, use `case x : Throwable` to clear this warning.
+  try { pf(1) } catch { case x => println(x) }
+                             ^
+one warning found
 === pf(1):
 MySmartPF.apply entered...
 newPF.applyOrElse entered...

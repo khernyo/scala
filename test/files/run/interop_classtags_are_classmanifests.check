@@ -1,3 +1,7 @@
+interop_classtags_are_classmanifests.scala:5: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    println(classManifest[T])
+            ^
+one warning found
 Int
 java.lang.String
 Array[int]

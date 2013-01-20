@@ -1,3 +1,5 @@
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
              phase name  id  description
              ----------  --  -----------
                  parser   1  parse source into ASTs, perform simple desugaring

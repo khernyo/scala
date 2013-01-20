@@ -1,3 +1,13 @@
+t4148.scala:2: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  val x1 = try { "aaa".asInstanceOf[Int] } catch { case _ => "cce1" }
+                                                        ^
+t4148.scala:3: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  val x2 = try { (5: Any).asInstanceOf[Int] } catch { case _ => "cce2" }
+                                                           ^
+t4148.scala:4: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  val x3 = try { (new java.lang.Short(100.toShort).asInstanceOf[Int]) } catch { case _ => "cce3" }
+                                                                                     ^
+three warnings found
 cce1
 5
 100

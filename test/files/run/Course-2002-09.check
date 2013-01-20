@@ -1,3 +1,22 @@
+Course-2002-09.scala:11: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def newValue: Unit = error("NoConstraint.newValue");
+                       ^
+Course-2002-09.scala:12: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def dropValue: Unit = error("NoConstraint.dropValue");
+                        ^
+Course-2002-09.scala:50: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case Pair(Some(x), _      )if (x < 0) => error("Square of negative number")
+                                             ^
+Course-2002-09.scala:75: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def newValue: Unit = error("Constant.newValue");
+                       ^
+Course-2002-09.scala:76: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def dropValue: Unit = error("Constant.dropValue");
+                        ^
+Course-2002-09.scala:103: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      if (v != v1) error("Error! contradiction: " + v + " and " + v1);
+                   ^
+6 warnings found
 Probe: f = 32.0
 Probe: c = 0.0
 Probe: f = ?

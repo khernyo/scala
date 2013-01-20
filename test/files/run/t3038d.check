@@ -1,0 +1,4 @@
+t3038d.scala:21: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+class Bar extends Foo {
+      ^
+one warning found

@@ -1,0 +1,4 @@
+t0677-old.scala:2: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  class X[T: ClassManifest] { 
+           ^
+one warning found

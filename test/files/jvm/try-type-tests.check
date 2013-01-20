@@ -1,0 +1,5 @@
+try-type-tests.scala:49: warning: match may not be exhaustive.
+It would fail on the following input: Failure((x: Throwable forSome x not in NoSuchElementException))
+		n match {
+                ^
+one warning found

@@ -1,3 +1,7 @@
+xml03syntax.scala:94: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    parsed
+    ^
+one warning found
 true
 true
 true

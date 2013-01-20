@@ -1,3 +1,7 @@
+t0325.scala:27: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e@_ => println(which + " failed with " + e.getClass)
+           ^
+one warning found
 List(a, b)
 List(a, b)
 List(a, b)

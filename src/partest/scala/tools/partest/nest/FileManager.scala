@@ -8,13 +8,14 @@
 package scala.tools.partest
 package nest
 
-import java.io.{File, FilenameFilter, IOException, StringWriter,
-                FileInputStream, FileOutputStream, BufferedReader,
-                FileReader, PrintWriter, FileWriter}
+import java.io._
 import java.net.URI
 import scala.tools.nsc.io.{ Path, Directory, File => SFile }
 import scala.sys.process._
 import scala.collection.mutable
+import scala.tools.nsc.io
+import scala.Some
+import java.util.Locale
 
 trait FileUtil {
   /**
@@ -80,7 +81,9 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
   val fileBase: String = basename(testFile.getName)
 
   val logFile = new File(dir, s"$fileBase-$kind.log")
-  val log     = SFile(logFile).printWriter()  // FIXME Writing into this will never fail, not even after close(). Replace with something more bloody.
+  private def createLogStream = SFile(logFile).printStream()
+  private var logStream: Option[PrintStream] = None
+  def log     = logStream.get  // FIXME Writing into this will never fail, not even after close(). Replace with something more bloody.
   val parent  = testFile.getParentFile
   val outDir  = new File(parent, s"$fileBase-$kind.obj")
 
@@ -91,7 +94,33 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
     outDir
   }
 
+  def flagsFile = {
+    val logFileBasename = basename(logFile.getName)
+    new File(parent, "%s.flags" format (logFileBasename.substring(0, logFileBasename.lastIndexOf("-"))))
+  }
+
   def logFileExists: Boolean = logFile.canRead
+
+  def createLogFile() {
+    require(logStream.isEmpty)
+    logStream = Some(createLogStream)
+  }
+
+  def closeLog() {
+    require(logStream.isDefined)
+    if (log.checkError()) NestUI.warning("There were errors with the log handling.\n")
+
+    SFile.closeQuietly(log)
+
+    // normalize line endings
+    // System.getProperty("line.separator") should be "\n" here
+    // so reading a file and writing it back should convert all CRLFs to LFs
+    SFile(logFile).printlnAll(SFile(logFile).lines.toList: _*)
+
+    logStream = None
+  }
+
+  def isLogClosed = logStream.isEmpty
 
   def checkFile: File = ???
   def checkFileExists: Boolean = ???

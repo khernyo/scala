@@ -124,7 +124,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     NestUI.normal("]\n", printer)
   }
 
-  private def javac(testContext: TestContext, outDir: File, files: List[File], output: File): CompilationOutcome = {
+  private def javac(testContext: TestContext, outDir: File, files: List[File]): CompilationOutcome = {
     // compile using command-line javac compiler
     val args = Seq(
       javacCmd,
@@ -134,32 +134,28 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       join(outDir.toString, CLASSPATH)
     ) ++ files.map("" + _)
 
-    try if (runCommand(args, output)) CompileSuccess else CompileFailed
+    try if (runCommand(args, testContext)) CompileSuccess else CompileFailed
     catch exHandler(testContext, "javac command failed:\n" + args.map("  " + _ + "\n").mkString + "\n", CompilerCrashed)
   }
 
   /** Runs command redirecting standard out and error out to output file.
    *  Overloaded to accept a sequence of arguments.
    */
-  private def runCommand(args: Seq[String], outFile: File): Boolean = {
+  private def runCommand(args: Seq[String], testContext: TestContext): Boolean = {
     NestUI.verbose("running command:\n"+args.map("  " + _ + "\n").mkString)
-    runCommandImpl(Process(args), outFile)
+    runCommandImpl(Process(args), testContext)
   }
 
   /** Runs command redirecting standard out and error out to output file.
    *  Overloaded to accept a single string = concatenated command + arguments.
    */
-  private def runCommand(command: String, outFile: File): Boolean = {
+  private def runCommand(command: String, testContext: TestContext): Boolean = {
     NestUI.verbose("running command:"+command)
-    runCommandImpl(Process(command), outFile)
+    runCommandImpl(Process(command), testContext)
   }
 
-  private def runCommandImpl(process: => ProcessBuilder, outFile: File): Boolean = {
-    val exitCode = (process #> outFile !)
-    // normalize line endings
-    // System.getProperty("line.separator") should be "\n" here
-    // so reading a file and writing it back should convert all CRLFs to LFs
-    SFile(outFile).printlnAll(SFile(outFile).lines.toList: _*)
+  private def runCommandImpl(process: => ProcessBuilder, testContext: TestContext): Boolean = {
+    val exitCode = process ! ProcessLogger(testContext.log println _)
     exitCode == 0
   }
 
@@ -168,7 +164,8 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
   @inline private def isJavaOrScala(f: File) = isJava(f) || isScala(f)
 
   private def logStackTrace(testContext: TestContext, t: Throwable, msg: String): Boolean = {
-    Seq(msg, stackTraceString(t)) foreach { testContext.log write _ }
+    testContext.log print msg
+    testContext.log print stackTraceString(t)
     testContext.outputLogFile() // if running the test threw an exception, output log file
     false
   }
@@ -191,18 +188,18 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       if (outDir.isDirectory) Some(outDir) else None
     ).flatten
 
-    private def execTest(outDir: File, logFile: File, classpathPrefix: String = "", javaOpts: String = ""): Boolean = {
+    private def execTest(outDir: File, testContext: TestContext, classpathPrefix: String = "", javaOpts: String = ""): Boolean = {
       // check whether there is a ".javaopts" file
-      val argsFile  = new File(logFile.getParentFile, fileBase + ".javaopts")
+      val argsFile  = new File(testContext.dir, testContext.fileBase + ".javaopts")
       val argString = file2String(argsFile)
       if (argString != "")
         NestUI.verbose("Found javaopts file '%s', using options: '%s'".format(argsFile, argString))
 
       val testFullPath = {
-        val d = new File(logFile.getParentFile, fileBase)
+        val d = new File(testContext.dir, testContext.fileBase)
         if (d.isDirectory) d.getAbsolutePath
         else {
-          val f = new File(logFile.getParentFile, fileBase + ".scala")
+          val f = new File(testContext.dir, testContext.fileBase + ".scala")
           if (f.isFile) f.getAbsolutePath
           else ""
         }
@@ -246,7 +243,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         )
       )
 
-      runCommand(cmd, logFile)
+      runCommand(cmd, testContext)
     }
 
     private def getCheckFilePath(dir: File, suffix: String = "") = {
@@ -258,6 +255,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     private def getCheckFile(dir: File) = Some(getCheckFilePath(dir, kind)) filter (_.canRead)
 
     private def compareOutput(dir: File, logFile: File): String = {
+      testContext.closeLog()
       val checkFile = getCheckFilePath(dir, kind)
       val diff =
         if (checkFile.canRead) compareFiles(logFile, checkFile.jfile)
@@ -326,15 +324,15 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       noGroupSuffix :: groups filterNot (_.isEmpty)
     }
 
-    def compileFilesIn(dir: File, logFile: File, outDir: File): CompilationOutcome = {
+    def compileFilesIn(dir: File, outDir: File): CompilationOutcome = {
       def compileGroup(g: List[File]): CompilationOutcome = {
         val (scalaFiles, javaFiles) = g partition isScala
         val allFiles = javaFiles ++ scalaFiles
 
         List(1, 2, 3).foldLeft(CompileSuccess: CompilationOutcome) {
-          case (CompileSuccess, 1) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), allFiles, kind, logFile)     // java + scala
-          case (CompileSuccess, 2) if javaFiles.nonEmpty  => javac(testContext, outDir, javaFiles, logFile)                                    // java
-          case (CompileSuccess, 3) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), scalaFiles, kind, logFile)   // scala
+          case (CompileSuccess, 1) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), allFiles, kind, testContext)     // java + scala
+          case (CompileSuccess, 2) if javaFiles.nonEmpty  => javac(testContext, outDir, javaFiles)                                    // java
+          case (CompileSuccess, 3) if scalaFiles.nonEmpty => compileMgr.attemptCompile(Some(outDir), scalaFiles, kind, testContext)   // scala
           case (outcome, _)                               => outcome
         }
       }
@@ -345,32 +343,30 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     }
 
     def runTestCommon(testContext: TestContext, file: File)(
-      onSuccess: (File, File) => Boolean,
-      onFail: (File, File) => Unit = (_, _) => ()): (Boolean, LogContext) =
+      onSuccess: (PrintStream, File) => Boolean,
+      onFail: (PrintStream, File) => Unit = (_, _) => ()): (Boolean, LogContext) =
     {
       runInContext(testContext, (testContext: TestContext) => {
         val outcome = (
-          if (file.isDirectory) compileFilesIn(file, logFile, outDir)
-          else compileMgr.attemptCompile(None, List(file), kind, logFile)
+          if (file.isDirectory) compileFilesIn(file, outDir)
+          else compileMgr.attemptCompile(None, List(file), kind, testContext)
         )
         val result = (
           if (testContext.expectFailure) outcome.isNegative
           else outcome.isPositive
         )
 
-        if (result) onSuccess(logFile, outDir)
-        else { onFail(logFile, outDir) ; false }
+        if (result) onSuccess(testContext.log, outDir)
+        else { onFail(testContext.log, outDir) ; false }
       })
     }
 
     def runJvmTest(file: File): (Boolean, LogContext) =
-      runTestCommon(testContext, file)((logFile, outDir) => {
-        val dir      = file.getParentFile
-
+      runTestCommon(testContext, file)((log, outDir) => {
         // adding codelib.jar to the classpath
         // codelib provides the possibility to override standard reify
         // this shields the massive amount of reification tests from changes in the API
-        execTest(outDir, logFile, PathSettings.srcCodeLib.toString) && {
+        execTest(outDir, testContext, PathSettings.srcCodeLib.toString) && {
           // cannot replace paths here since this also inverts slashes
           // which affects a bunch of tests
           //fileManager.mapFile(logFile, replaceSlashes(dir, _))
@@ -379,7 +375,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
       })
 
     // Apache Ant 1.6 or newer
-    def ant(args: Seq[String], output: File): Boolean = {
+    def ant(args: Seq[String], testContext: TestContext): Boolean = {
       val antDir = Directory(envOrElse("ANT_HOME", "/opt/ant/"))
       val antLibDir = Directory(antDir / "lib")
       val antLauncherPath = SFile(antLibDir / "ant-launcher.jar").path
@@ -394,13 +390,13 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         ) ++ antOptions ++ args
       )
 
-      try runCommand(cmd, output)
+      try runCommand(cmd, testContext)
       catch exHandler(testContext, "ant command '" + cmd + "' failed:\n", false)
     }
 
-    def runAntTest(file: File): (Boolean, LogContext) = {
+    def runAntTest(testContext: TestContext): (Boolean, LogContext) = {
       val (swr, wr) = newTestWriters()
-      printInfoStart(file, wr)
+      printInfoStart(testContext.testFile, wr)
 
       NestUI.verbose(this+" running test "+fileBase)
 
@@ -411,9 +407,9 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
           else if (fileManager.LATEST_LIB endsWith "dists/latest/lib/scala-library.jar/") "latest"
           else "installed"
         )
-        val args = Array(binary, "-logfile", logFile.path, "-file", file.path)
+        val args = Array(binary, "-logfile", testContext.logFile.path, "-file", testContext.testFile.path)
         NestUI.verbose("ant "+args.mkString(" "))
-        ant(args, logFile) && diffCheck(file, compareOutput(testContext))
+        ant(args, testContext) && diffCheck(testContext.testFile, compareOutput(testContext))
       }
       catch { // *catch-all*
         case e: Exception =>
@@ -429,7 +425,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         val dir       = file.getParentFile
 
         // adding the instrumented library to the classpath
-        ( execTest(outDir, logFile, PathSettings.srcSpecLib.toString) &&
+        ( execTest(outDir, testContext, PathSettings.srcSpecLib.toString) &&
           diffCheck(file, compareOutput(testContext))
         )
       })
@@ -439,13 +435,13 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         val dir       = file.getParentFile
 
         // adding the javagent option with path to instrumentation agent
-        execTest(outDir, logFile, javaOpts = "-javaagent:"+PathSettings.instrumentationAgentLib) &&
+        execTest(outDir, testContext, javaOpts = "-javaagent:"+PathSettings.instrumentationAgentLib) &&
         diffCheck(file, compareOutput(testContext))
       })
 
     def processSingleFile(file: File): (Boolean, LogContext) = kind match {
       case "scalacheck" =>
-        val succFn: (File, File) => Boolean = { (logFile, outDir) =>
+        val succFn: (PrintStream, File) => Boolean = { (log, outDir) =>
           NestUI.verbose("compilation of "+file+" succeeded\n")
 
           val outURL    = outDir.getAbsoluteFile.toURI.toURL
@@ -477,7 +473,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         )
 
       case "neg" =>
-        runTestCommon(testContext, file)((logFile, outDir) => {
+        runTestCommon(testContext, file)((log, outDir) => {
           // compare log file to check file
           val dir      = file.getParentFile
 
@@ -499,7 +495,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         runJvmTest(file) // for the moment, it's exactly the same as for a run test
 
       case "ant" =>
-        runAntTest(file)
+        runAntTest(testContext)
 
       case "buildmanager" =>
         val (swr, wr) = newTestWriters()
@@ -709,10 +705,10 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
         )
 
         // 4. compile testFile
-        val ok = compileMgr.attemptCompile(None, List(testFile), kind, logFile) eq CompileSuccess
+        val ok = compileMgr.attemptCompile(None, List(testFile), kind, testContext) eq CompileSuccess
         NestUI.verbose("compilation of " + testFile + (if (ok) "succeeded" else "failed"))
         val result = ok && {
-          execTest(outDir, logFile) && {
+          execTest(outDir, testContext) && {
             NestUI.verbose(this+" finished running "+fileBase)
             diffCheck(file, compareOutput(testContext))
           }
@@ -734,7 +730,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
             val resFile = results.head
             // 2. Compile source file
 
-            if (!compileMgr.attemptCompile(Some(outDir), sources, kind, logFile).isPositive) {
+            if (!compileMgr.attemptCompile(Some(outDir), sources, kind, testContext).isPositive) {
               NestUI.normal("compilerMgr failed to compile %s to %s".format(sources mkString ", ", outDir))
               false
             }
@@ -774,7 +770,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
             }
             else file.getAbsolutePath
 
-          val ok = runCommand(cmdString+argString, logFile)
+          val ok = runCommand(cmdString+argString, testContext)
           ( ok && diffCheck(file, compareOutput(testContext)) )
         }
         catch { case e: Exception => NestUI.verbose("caught "+e) ; false }
@@ -791,6 +787,7 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     }
 
     def run(): (Boolean, LogContext) = {
+      testContext.createLogFile()
       val result = try processSingleFile(testFile) catch { case t: Throwable => (false, crashContext(t)) }
       passed = Some(result._1)
       result

@@ -1,3 +1,7 @@
+warning: there were 13 feature warnings; re-run with -feature for details
+one warning found
+warning: there were 13 feature warnings; re-run with -feature for details
+one warning found
 t4079_2.scala:2: error: could not find implicit value for parameter f: Functor[List]
   Cat.compose[List,Option].Functor
                            ^

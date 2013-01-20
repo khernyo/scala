@@ -1,3 +1,7 @@
+vector1.scala:105: warning: This catches all Throwables. If this is really intended, use `case ex : Throwable` to clear this warning.
+    case ex =>
+         ^
+one warning found
 ===== test1 =====
 ===== test2 =====
 ===== test3 =====

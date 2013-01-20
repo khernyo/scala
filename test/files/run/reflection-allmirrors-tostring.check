@@ -1,3 +1,5 @@
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
 class mirror for C (bound to null)
 module mirror for M (bound to null)
 instance mirror for an instance of C

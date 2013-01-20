@@ -1,3 +1,5 @@
+warning: there were 15 feature warnings; re-run with -feature for details
+one warning found
 Map(abc -> 55)
 (a,0)
 (b,1)

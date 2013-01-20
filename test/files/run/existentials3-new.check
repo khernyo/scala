@@ -1,3 +1,5 @@
+warning: there were 15 feature warnings; re-run with -feature for details
+one warning found
 Bar.type, t=TypeRef, s=type Bar.type
 Bar, t=TypeRef, s=type Bar
 Test.ToS, t=RefinedType, s=f3

@@ -1,3 +1,12 @@
+structural.scala:155: warning: case classes without a parameter list have been deprecated;
+use either case objects or case classes with `()' as parameter list.
+  case class Exc extends Exception
+                ^
+structural.scala:167: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+      case e => println(e)
+           ^
+warning: there were 39 feature warnings; re-run with -feature for details
+three warnings found
  1. hey
  2. 11
  3. dee

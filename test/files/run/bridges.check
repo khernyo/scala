@@ -1,0 +1,4 @@
+bridges.scala:3591: warning: This catches all Throwables. If this is really intended, use `case exception : Throwable` to clear this warning.
+      case exception => {
+           ^
+one warning found

@@ -1,3 +1,10 @@
+lazy-locals.scala:153: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+  {
+  ^
+lazy-locals.scala:159: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    {
+    ^
+two warnings found
 forced lazy val q
 q = 10
 forced lazy val t

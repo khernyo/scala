@@ -1,3 +1,7 @@
+replyablereactor4.scala:4: warning: trait ReplyReactor in package actors is deprecated: Scala Actors are being removed from the standard library. Please refer to the migration guide.
+class MyActor extends ReplyReactor {
+                      ^
+one warning found
 Some('hello)
 Some('hello)
 Some('hello)

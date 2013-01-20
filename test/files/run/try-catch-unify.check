@@ -1,3 +1,7 @@
+try-catch-unify.scala:12: warning: This catches all Throwables. If this is really intended, use `case t : Throwable` to clear this warning.
+       case t => println(t.getMessage)
+            ^
+one warning found
 Failure(java.lang.NumberFormatException: For input string: "Hi")
 Success(5.0)
 O NOES

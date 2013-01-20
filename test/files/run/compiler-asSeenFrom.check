@@ -1,3 +1,8 @@
+compiler-asSeenFrom.scala:120: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    true
+    ^
+warning: there were 1 feature warnings; re-run with -feature for details
+two warnings found
 class C {
   type                       seen from prefix           is
   ----                       ----------------           --

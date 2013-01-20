@@ -1,0 +1,7 @@
+t3361.scala:60: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => require(false)
+           ^
+t3361.scala:90: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => require(false)
+           ^
+two warnings found

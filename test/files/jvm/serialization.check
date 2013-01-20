@@ -1,3 +1,16 @@
+serialization.scala:302: warning: type ClassManifest in package reflect is deprecated: Use scala.reflect.ClassTag instead
+    val _abu1: ArrayBuilder[ClassManifest[Long]] = read(write(abu1))
+               ^
+serialization.scala:303: warning: type ClassManifest in package reflect is deprecated: Use scala.reflect.ClassTag instead
+    check(abu1, _abu1)
+    ^
+serialization.scala:306: warning: type ClassManifest in package reflect is deprecated: Use scala.reflect.ClassTag instead
+    val _abu2: ArrayBuilder[ClassManifest[Float]] = read(write(abu2))
+               ^
+serialization.scala:307: warning: type ClassManifest in package reflect is deprecated: Use scala.reflect.ClassTag instead
+    check(abu2, _abu2)
+    ^
+four warnings found
 a1 = Array[1,2,3]
 _a1 = Array[1,2,3]
 arrayEquals(a1, _a1): true

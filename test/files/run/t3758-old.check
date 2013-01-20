@@ -1,0 +1,28 @@
+t3758-old.scala:3: warning: method typeArguments in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag to capture type structure instead
+    assert(classManifest[Array[String]].typeArguments contains classManifest[String])
+                                        ^
+t3758-old.scala:3: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[String]].typeArguments contains classManifest[String])
+           ^
+t3758-old.scala:3: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[String]].typeArguments contains classManifest[String])
+                                                               ^
+t3758-old.scala:4: warning: method typeArguments in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag to capture type structure instead
+    assert(classManifest[Array[Int]].typeArguments contains classManifest[Int])
+                                     ^
+t3758-old.scala:4: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[Int]].typeArguments contains classManifest[Int])
+           ^
+t3758-old.scala:4: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[Int]].typeArguments contains classManifest[Int])
+                                                            ^
+t3758-old.scala:5: warning: method typeArguments in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag to capture type structure instead
+    assert(classManifest[Array[Float]].typeArguments contains classManifest[Float])
+                                       ^
+t3758-old.scala:5: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[Float]].typeArguments contains classManifest[Float])
+           ^
+t3758-old.scala:5: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+    assert(classManifest[Array[Float]].typeArguments contains classManifest[Float])
+                                                              ^
+9 warnings found

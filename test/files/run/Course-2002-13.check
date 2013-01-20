@@ -1,3 +1,10 @@
+Course-2002-13.scala:45: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    term match { case Var(n) if (name == n) => error("bad binding") case _ => () }
+                                               ^
+Course-2002-13.scala:171: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  def syntaxError(msg: String): Unit = error(msg + ", but " + token + " found");
+                                       ^
+two warnings found
 List(S = jean, V = mange, A = le, D = grand, N = table)
 List(S = jean, V = mange, A = le, D = grand, N = cheval)
 

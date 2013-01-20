@@ -1,0 +1,10 @@
+main.scala:73: warning: method erasure in trait ClassManifestDeprecatedApis is deprecated: Use runtimeClass instead
+        if (manifest[T].erasure != t.getClass) throw t
+                        ^
+warning: there were 414 feature warnings; re-run with -feature for details
+two warnings found
+main.scala:73: warning: method erasure in trait ClassManifestDeprecatedApis is deprecated: Use runtimeClass instead
+        if (manifest[T].erasure != t.getClass) throw t
+                        ^
+warning: there were 414 feature warnings; re-run with -feature for details
+two warnings found

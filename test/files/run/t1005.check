@@ -1,2 +1,12 @@
+t1005.scala:6: warning: FromMono has a main method with parameter type Array[String], but Test.FromMono will not be a runnable program.
+  Reason: main method must have exact signature (Array[String])Unit
+  object FromMono{
+         ^
+t1005.scala:10: warning: FromPoly has a main method with parameter type Array[String], but Test.FromPoly will not be a runnable program.
+  Reason: main method must have exact signature (Array[String])Unit
+  object FromPoly{
+         ^
+warning: there were 2 feature warnings; re-run with -feature for details
+three warnings found
 Halp!
 Halp!

@@ -1,3 +1,25 @@
+try.scala:48: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        case _ =>
+             ^
+try.scala:65: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+      1+1;
+       ^
+try.scala:68: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ =>
+           ^
+try.scala:74: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => ();
+         ^
+try.scala:98: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+       case _ => null
+            ^
+try.scala:64: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        error("exit");
+        ^
+try.scala:70: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        error("for good");
+        ^
+7 warnings found
 1 + 1 = 2
 1 + 1 = 2
 1 + 1 = 2

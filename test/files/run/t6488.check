@@ -1,1 +1,5 @@
+t6488.scala:8: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    catch { case _ => () }
+                 ^
+one warning found
 Success

@@ -1,0 +1,14 @@
+patmatnew.scala:348: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+        case 1 => "OK"
+                  ^
+patmatnew.scala:349: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+        case 2 => assert(false); "KO"
+                                 ^
+patmatnew.scala:350: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+        case 3 => assert(false); "KO"
+                                 ^
+patmatnew.scala:667: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+            case e => {
+                 ^
+warning: there were 1 feature warnings; re-run with -feature for details
+5 warnings found

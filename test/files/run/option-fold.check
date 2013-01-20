@@ -1,3 +1,8 @@
+option-fold.scala:7: warning: match may not be exhaustive.
+It would fail on the following input: A()
+  def g(x: Option[A]) = x.fold(-1) {
+                                   ^
+one warning found
 List()
 List(5)
 -1

@@ -1,3 +1,11 @@
+bitsets.scala:88: warning: method fromArray in object BitSet is deprecated: Use fromBitMask[NoCopy] instead of fromArray
+  val is1 = BitSet.fromArray(Array())
+                   ^
+bitsets.scala:89: warning: method fromArray in object BitSet is deprecated: Use fromBitMask[NoCopy] instead of fromArray
+  val is2 = BitSet.fromArray(Array(4))
+                   ^
+warning: there were 12 feature warnings; re-run with -feature for details
+three warnings found
 ms0 = BitSet(2)
 ms1 = BitSet(2)
 ms2 = BitSet(2)

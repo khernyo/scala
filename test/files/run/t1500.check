@@ -1,3 +1,11 @@
+t1500.scala:24: warning: value compiler in class IMain is deprecated: Use `global` for access to the compiler instance.
+    val global = tool.compiler
+                      ^
+t1500.scala:3: warning: Test has a main method with parameter type Array[String], but Test will not be a runnable program.
+  Reason: main method must have exact signature (Array[String])Unit
+object Test {
+       ^
+two warnings found
 defined class posingAs
 resolve: [A, B](x: A @posingAs[B])B
 x: Any = 7

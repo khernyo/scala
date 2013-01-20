@@ -1,3 +1,70 @@
+typerep.scala:284: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class ClassRep[A](elemRep: TypeRep[A]) extends TypeRep[Class[A]] {
+             ^
+typerep.scala:288: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class SomeRep[A](elemRep: TypeRep[A]) extends TypeRep[Some[A]] {
+             ^
+typerep.scala:292: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class NoneRep[A](elemRep: TypeRep[A]) extends TypeRep[Option[A]] {
+             ^
+typerep.scala:297: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class ListRep[A](elemRep: TypeRep[A]) extends TypeRep[List[A]] {
+             ^
+typerep.scala:302: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class ArrayRep[A](elemRep: TypeRep[A]) extends TypeRep[Array[A]] {
+             ^
+typerep.scala:307: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple2Rep[A1, A2](_1: TypeRep[A1], _2: TypeRep[A2]) extends TypeRep[(A1, A2)] {
+             ^
+typerep.scala:311: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple3Rep[A1, A2, A3](_1: TypeRep[A1], _2: TypeRep[A2], _3: TypeRep[A3]) extends TypeRep[Tuple3[A1, A2, A3]] {
+             ^
+typerep.scala:315: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple4Rep[A1, A2, A3, A4](_1: TypeRep[A1], _2: TypeRep[A2], _3: TypeRep[A3], _4: TypeRep[A4]) extends TypeRep[Tuple4[A1, A2, A3, A4]] {
+             ^
+typerep.scala:319: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple5Rep[A1, A2, A3, A4, A5](_1: TypeRep[A1], _2: TypeRep[A2], _3: TypeRep[A3], _4: TypeRep[A4], _5: TypeRep[A5]) extends TypeRep[Tuple5[A1, A2, A3, A4, A5]] {
+             ^
+typerep.scala:323: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple6Rep[A1, A2, A3, A4, A5, A6](val _1: TypeRep[A1], val _2: TypeRep[A2], val _3: TypeRep[A3], val _4: TypeRep[A4], val _5: TypeRep[A5], val _6: TypeRep[A6]) extends TypeRep[Tuple6[A1, A2, A3, A4, A5, A6]] {
+             ^
+typerep.scala:327: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple7Rep[A1, A2, A3, A4, A5, A6, A7](val _1: TypeRep[A1], val _2: TypeRep[A2], val _3: TypeRep[A3], val _4: TypeRep[A4], val _5: TypeRep[A5], val _6: TypeRep[A6], val _7: TypeRep[A7]) extends TypeRep[Tuple7[A1, A2, A3, A4, A5, A6, A7]] {
+             ^
+typerep.scala:331: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple8Rep[A1, A2, A3, A4, A5, A6, A7, A8](val _1: TypeRep[A1], val _2: TypeRep[A2], val _3: TypeRep[A3], val _4: TypeRep[A4], val _5: TypeRep[A5], val _6: TypeRep[A6], val _7: TypeRep[A7], val _8: TypeRep[A8]) extends TypeRep[Tuple8[A1, A2, A3, A4, A5, A6, A7, A8]] {
+             ^
+typerep.scala:335: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Tuple9Rep[A1, A2, A3, A4, A5, A6, A7, A8, A9](val _1: TypeRep[A1], val _2: TypeRep[A2], val _3: TypeRep[A3], val _4: TypeRep[A4], val _5: TypeRep[A5], val _6: TypeRep[A6], val _7: TypeRep[A7], val _8: TypeRep[A8], val _9: TypeRep[A9]) extends TypeRep[Tuple9[A1, A2, A3, A4, A5, A6, A7, A8, A9]] {
+             ^
+typerep.scala:340: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function1Rep[A1, B](a1: TypeRep[A1], b: TypeRep[B]) extends TypeRep[Function1[A1, B]] {
+             ^
+typerep.scala:344: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function2Rep[A1, A2, B](a1: TypeRep[A1], a2: TypeRep[A2], b: TypeRep[B]) extends TypeRep[Function2[A1, A2, B]] {
+             ^
+typerep.scala:348: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function3Rep[A1, A2, A3, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], b: TypeRep[B]) extends TypeRep[Function3[A1, A2, A3, B]] {
+             ^
+typerep.scala:352: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function4Rep[A1, A2, A3, A4, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], b: TypeRep[B]) extends TypeRep[Function4[A1, A2, A3, A4, B]] {
+             ^
+typerep.scala:356: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function5Rep[A1, A2, A3, A4, A5, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], a5: TypeRep[A5], b: TypeRep[B]) extends TypeRep[Function5[A1, A2, A3, A4, A5, B]] {
+             ^
+typerep.scala:360: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function6Rep[A1, A2, A3, A4, A5, A6, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], a5: TypeRep[A5], a6: TypeRep[A6], b: TypeRep[B]) extends TypeRep[Function6[A1, A2, A3, A4, A5, A6, B]] {
+             ^
+typerep.scala:364: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function7Rep[A1, A2, A3, A4, A5, A6, A7, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], a5: TypeRep[A5], a6: TypeRep[A6], a7: TypeRep[A7], b: TypeRep[B]) extends TypeRep[Function7[A1, A2, A3, A4, A5, A6, A7, B]] {
+             ^
+typerep.scala:368: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function8Rep[A1, A2, A3, A4, A5, A6, A7, A8, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], a5: TypeRep[A5], a6: TypeRep[A6], a7: TypeRep[A7], a8: TypeRep[A8], b: TypeRep[B]) extends TypeRep[Function8[A1, A2, A3, A4, A5, A6, A7, A8, B]] {
+             ^
+typerep.scala:372: warning: class serializable in package annotation is deprecated: instead of `@serializable class C`, use `class C extends Serializable`
+  case class Function9Rep[A1, A2, A3, A4, A5, A6, A7, A8, A9, B](a1: TypeRep[A1], a2: TypeRep[A2], a3: TypeRep[A3], a4: TypeRep[A4], a5: TypeRep[A5], a6: TypeRep[A6], a7: TypeRep[A7], a8: TypeRep[A8], a9: TypeRep[A9], b: TypeRep[B]) extends TypeRep[Function9[A1, A2, A3, A4, A5, A6, A7, A8, A9, B]] {
+             ^
+22 warnings found
 Boolean
 Boolean
 true

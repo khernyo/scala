@@ -16,8 +16,9 @@ import scala.tools.nsc.util.{ ClassPath, FakePos }
 import scala.tools.nsc.Properties.{ setProp, propOrEmpty }
 import scala.tools.util.PathResolver
 import io.Path
-import java.io.{ File, BufferedReader, PrintWriter, FileReader, Writer, FileWriter, StringWriter }
+import java.io._
 import File.pathSeparator
+import scala.Console
 
 sealed abstract class CompilationOutcome {
   def merge(other: CompilationOutcome): CompilationOutcome
@@ -47,7 +48,7 @@ class TestSettings(cp: String, error: String => Unit) extends Settings(error) {
 }
 
 abstract class SimpleCompiler {
-  def compile(out: Option[File], files: List[File], kind: String, log: File): CompilationOutcome
+  def compile(out: Option[File], files: List[File], kind: String, testContext: TestContext): CompilationOutcome
 }
 
 class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
@@ -57,7 +58,7 @@ class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
     else
       new Global(settings, reporter)
 
-  def newGlobal(settings: Settings, logWriter: FileWriter): Global =
+  def newGlobal(settings: Settings, logWriter: PrintStream): Global =
     newGlobal(settings, new ExtConsoleReporter(settings, new PrintWriter(logWriter)))
 
   def newSettings(): TestSettings = new TestSettings(fileManager.LATEST_LIB)
@@ -83,17 +84,14 @@ class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
     (opt2 ::: pluginOption) mkString " "
   }
 
-  def compile(out: Option[File], files: List[File], kind: String, log: File): CompilationOutcome = {
+  def compile(out: Option[File], files: List[File], kind: String, testContext: TestContext): CompilationOutcome = {
     val testSettings = out match {
       case Some(f)  => newSettings(f.getAbsolutePath)
       case _        => newSettings()
     }
-    val logWriter = new FileWriter(log)
 
     // check whether there is a ".flags" file
-    val logFile = basename(log.getName)
-    val flagsFileName = "%s.flags" format (logFile.substring(0, logFile.lastIndexOf("-")))
-    val argString = (io.File(log).parent / flagsFileName) ifFile (x => updatePluginPath(x.slurp())) getOrElse ""
+    val argString = SFile(testContext.flagsFile) ifFile (x => updatePluginPath(x.slurp())) getOrElse ""
 
     // slurp local flags (e.g., "A_1.flags")
     val fstFile = SFile(files(0))
@@ -110,7 +108,7 @@ class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
     NestUI.verbose("scalac options: "+allOpts)
 
     val command = new CompilerCommand(args, testSettings)
-    val global = newGlobal(command.settings, logWriter)
+    val global = newGlobal(command.settings, testContext.log)
     val testRep: ExtConsoleReporter = global.reporter.asInstanceOf[ExtConsoleReporter]
 
     val testFileFn: (File, FileManager) => TestFile = kind match {
@@ -136,21 +134,17 @@ class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
 
     val toCompile = files map (_.getPath)
 
-    try {
-      NestUI.verbose("compiling "+toCompile)
-      NestUI.verbose("with classpath: "+global.classPath.toString)
-      NestUI.verbose("and java classpath: "+ propOrEmpty("java.class.path"))
-      try new global.Run compile toCompile
-      catch {
-        case FatalError(msg) =>
-          testRep.error(null, "fatal error: " + msg)
-          return CompilerCrashed
-      }
-
-      testRep.printSummary()
-      testRep.writer.close()
+    NestUI.verbose("compiling "+toCompile)
+    NestUI.verbose("with classpath: "+global.classPath.toString)
+    NestUI.verbose("and java classpath: "+ propOrEmpty("java.class.path"))
+    try new global.Run compile toCompile
+    catch {
+      case FatalError(msg) =>
+        testRep.error(null, "fatal error: " + msg)
+        return CompilerCrashed
     }
-    finally logWriter.close()
+
+    testRep.printSummary()
 
     if (testRep.hasErrors) CompileFailed
     else CompileSuccess
@@ -159,6 +153,6 @@ class DirectCompiler(val fileManager: FileManager) extends SimpleCompiler {
 
 class CompileManager(val fileManager: FileManager) {
   private def newCompiler = new DirectCompiler(fileManager)
-  def attemptCompile(outdir: Option[File], sources: List[File], kind: String, log: File): CompilationOutcome =
-    newCompiler.compile(outdir, sources, kind, log)
+  def attemptCompile(outdir: Option[File], sources: List[File], kind: String, testContext: TestContext): CompilationOutcome =
+    newCompiler.compile(outdir, sources, kind, testContext)
 }

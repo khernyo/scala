@@ -1,1 +1,5 @@
+verify-ctor.scala:3: warning: method exit in object Predef is deprecated: Use `sys.exit(status)` instead
+    if (arr.length == 0) exit(1)
+                         ^
+one warning found
 abc

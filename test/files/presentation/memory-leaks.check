@@ -1,3 +1,35 @@
+MemoryLeaksTest.scala:33: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    new BatchSourceFile(AbstractFile.getFile(name))
+        ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                      ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                                                      ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                                                                                      ^
+MemoryLeaksTest.scala:74: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    val sourceFile = new BatchSourceFile(file, src.toCharArray)
+                         ^
+5 warnings found
+MemoryLeaksTest.scala:33: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    new BatchSourceFile(AbstractFile.getFile(name))
+        ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                      ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                                                      ^
+MemoryLeaksTest.scala:43: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    askReload(Seq(new BatchSourceFile(typerUnit), new BatchSourceFile(typesUnit), new BatchSourceFile(treesUnit)))
+                                                                                      ^
+MemoryLeaksTest.scala:74: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+    val sourceFile = new BatchSourceFile(file, src.toCharArray)
+                         ^
+5 warnings found
 reload: Trees.scala, Typers.scala, Types.scala
 reload: Trees.scala
 reload: Types.scala

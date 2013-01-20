@@ -1,3 +1,7 @@
+t0421-old.scala:4: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  def transpose[A: ClassManifest](xss: Array[Array[A]]) = {
+                 ^
+one warning found
 [Array(0, 1),Array(2, 3),Array(4, 5)]
 [Array(31.0)]
 [Array(24.0, 32.0)]

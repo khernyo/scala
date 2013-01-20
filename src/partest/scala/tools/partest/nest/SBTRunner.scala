@@ -23,7 +23,8 @@ object SBTRunner extends DirectRunner {
 
   def reflectiveRunTestsForFiles(kindFiles: Array[File], kind: String):java.util.Map[String, TestState] = {
     def failedOnlyIfRequired(files:List[File]):List[File]={
-      if (fileManager.failed) files filter (x => fileManager.logFileExists(x, kind)) else files
+      val testContexts = files map (new TestContext(_, kind))
+      (if (fileManager.failed) testContexts filter (_.logFileExists) else testContexts) map (_.testFile)
     }
     runTestsForFiles(failedOnlyIfRequired(kindFiles.toList), kind).asJava
   }

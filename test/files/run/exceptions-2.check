@@ -1,3 +1,31 @@
+exceptions-2.scala:45: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => error("..");
+         ^
+exceptions-2.scala:139: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        case _ => Console.println("Silently ignore exception in finally");
+             ^
+exceptions-2.scala:157: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      } catch { case _ => () }
+                     ^
+exceptions-2.scala:252: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => ();
+         ^
+exceptions-2.scala:267: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    try { 1 } catch { case e: java.io.IOException => () }
+          ^
+exceptions-2.scala:45: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case _ => error("..");
+              ^
+exceptions-2.scala:52: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      error("nnnnoooo");
+      ^
+exceptions-2.scala:62: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      error("nnnnoooo");
+      ^
+exceptions-2.scala:137: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        error("a");
+        ^
+9 warnings found
 nested1: 
 Innermost finally
 Outermost finally

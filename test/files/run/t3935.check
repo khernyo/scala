@@ -1,0 +1,4 @@
+t3935.scala:12: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ =>
+           ^
+one warning found

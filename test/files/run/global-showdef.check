@@ -1,3 +1,17 @@
+global-showdef.scala:7: warning: type SourceFile in package util is deprecated: Moved to scala.reflect.internal.util.SourceFile
+  val src: SourceFile = new BatchSourceFile("src", """
+           ^
+global-showdef.scala:7: warning: type BatchSourceFile in package util is deprecated: Moved to scala.reflect.internal.util.BatchSourceFile
+  val src: SourceFile = new BatchSourceFile("src", """
+                            ^
+global-showdef.scala:7: warning: type SourceFile in package util is deprecated: Moved to scala.reflect.internal.util.SourceFile
+  val src: SourceFile = new BatchSourceFile("src", """
+      ^
+global-showdef.scala:54: warning: type SourceFile in package util is deprecated: Moved to scala.reflect.internal.util.SourceFile
+      run.compileSources(List(src))
+                         ^
+warning: there were 1 feature warnings; re-run with -feature for details
+5 warnings found
 <<-- class foo.bar.Bippy after phase 'typer' -->>
   def showdefTestMemberClass1: Int
 <<-- type foo.bar.Bippy.BippyType after phase 'typer' -->>

@@ -1,3 +1,7 @@
+Course-2002-08.scala:36: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      } else error("insufficient funds");
+             ^
+one warning found
 x     = abc
 count = 111
 x     = hello

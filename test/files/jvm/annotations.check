@@ -1,3 +1,5 @@
+warning: there were 2 feature warnings; re-run with -feature for details
+one warning found
 class java.rmi.RemoteException
 class java.io.IOException
 @java.lang.Deprecated()

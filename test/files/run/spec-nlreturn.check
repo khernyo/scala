@@ -1,2 +1,4 @@
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
 scala.runtime.NonLocalReturnControl$mcI$sp
 16

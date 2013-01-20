@@ -1,2 +1,9 @@
+spec-matrix-old.scala:4: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+class Matrix[@specialized A: ClassManifest](val rows: Int, val cols: Int) {
+                           ^
+spec-matrix-old.scala:55: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  def multManifest[@specialized(Int) T](m: Matrix[T], n: Matrix[T])(implicit cm: ClassManifest[T], num: Numeric[T]) {
+                                                                                 ^
+two warnings found
 251437.0
 Boxed doubles: 1

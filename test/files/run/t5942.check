@@ -1,0 +1,4 @@
+t5942.scala:8: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+  try { tb.parse("def x = {") } catch { case _ => }
+                                             ^
+one warning found

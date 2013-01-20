@@ -1,2 +1,9 @@
+classmanifests_new_core.scala:2: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+  println(classManifest[Int])
+          ^
+classmanifests_new_core.scala:3: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+  println(classManifest[Int] eq Manifest.Int)
+          ^
+two warnings found
 Int
 true

@@ -1,3 +1,5 @@
+warning: there were 12 feature warnings; re-run with -feature for details
+one warning found
 test check_from was successful
 test check_range was successful
 test check_range2 was successful

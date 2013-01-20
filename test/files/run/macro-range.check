@@ -1,3 +1,6 @@
+warning: some macros could not be expanded and code fell back to overridden methods;
+recompiling with generated classfiles on the classpath might help.
+one warning found
 1
 2
 3

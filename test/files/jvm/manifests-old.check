@@ -1,3 +1,88 @@
+manifests-old.scala:59: warning: object Marshal in package util is deprecated: This class will be removed
+  println("()="+load[Unit](dump(())))
+                ^
+manifests-old.scala:59: warning: object Marshal in package util is deprecated: This class will be removed
+  println("()="+load[Unit](dump(())))
+                           ^
+manifests-old.scala:60: warning: object Marshal in package util is deprecated: This class will be removed
+  println("true="+load[Boolean](dump(true)))
+                  ^
+manifests-old.scala:60: warning: object Marshal in package util is deprecated: This class will be removed
+  println("true="+load[Boolean](dump(true)))
+                                ^
+manifests-old.scala:61: warning: object Marshal in package util is deprecated: This class will be removed
+  println("a="+load[Char](dump('a')))
+               ^
+manifests-old.scala:61: warning: object Marshal in package util is deprecated: This class will be removed
+  println("a="+load[Char](dump('a')))
+                          ^
+manifests-old.scala:62: warning: object Marshal in package util is deprecated: This class will be removed
+  println("1="+load[Int](dump(1)))
+               ^
+manifests-old.scala:62: warning: object Marshal in package util is deprecated: This class will be removed
+  println("1="+load[Int](dump(1)))
+                         ^
+manifests-old.scala:63: warning: object Marshal in package util is deprecated: This class will be removed
+  println("'abc="+load[Symbol](dump('abc)))
+                  ^
+manifests-old.scala:63: warning: object Marshal in package util is deprecated: This class will be removed
+  println("'abc="+load[Symbol](dump('abc)))
+                               ^
+manifests-old.scala:66: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(())="+load[List[Unit]](dump(List(()))))
+                      ^
+manifests-old.scala:66: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(())="+load[List[Unit]](dump(List(()))))
+                                       ^
+manifests-old.scala:67: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(true)="+load[List[Boolean]](dump(List(true))))
+                        ^
+manifests-old.scala:67: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(true)="+load[List[Boolean]](dump(List(true))))
+                                            ^
+manifests-old.scala:68: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List('abc)="+load[List[Symbol]](dump(List('abc))))
+                        ^
+manifests-old.scala:68: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List('abc)="+load[List[Symbol]](dump(List('abc))))
+                                           ^
+manifests-old.scala:72: warning: object Marshal in package util is deprecated: This class will be removed
+    load[Array[T]](x)(m).deep.toString
+    ^
+manifests-old.scala:73: warning: object Marshal in package util is deprecated: This class will be removed
+  println("Array()="+loadArray[Int](dump(Array(): Array[Int])))
+                                    ^
+manifests-old.scala:74: warning: object Marshal in package util is deprecated: This class will be removed
+  println("Array(true)="+loadArray[Boolean](dump(Array(true))))
+                                            ^
+manifests-old.scala:75: warning: object Marshal in package util is deprecated: This class will be removed
+  println("Array(a)="+loadArray[Char](dump(Array('a'))))
+                                      ^
+manifests-old.scala:76: warning: object Marshal in package util is deprecated: This class will be removed
+  println("Array(1)="+loadArray[Int](dump(Array(1))))
+                                     ^
+manifests-old.scala:79: warning: object Marshal in package util is deprecated: This class will be removed
+  println("((),())="+load[(Unit, Unit)](dump(((), ()))))
+                     ^
+manifests-old.scala:79: warning: object Marshal in package util is deprecated: This class will be removed
+  println("((),())="+load[(Unit, Unit)](dump(((), ()))))
+                                        ^
+manifests-old.scala:80: warning: object Marshal in package util is deprecated: This class will be removed
+  println("(true,false)="+load[(Boolean, Boolean)](dump((true, false))))
+                          ^
+manifests-old.scala:80: warning: object Marshal in package util is deprecated: This class will be removed
+  println("(true,false)="+load[(Boolean, Boolean)](dump((true, false))))
+                                                   ^
+manifests-old.scala:83: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(List(1), List(2))="+load[List[List[Int]]](dump(List(List(1), List(2)))))
+                                    ^
+manifests-old.scala:83: warning: object Marshal in package util is deprecated: This class will be removed
+  println("List(List(1), List(2))="+load[List[List[Int]]](dump(List(List(1), List(2)))))
+                                                          ^
+manifests-old.scala:86: warning: object Marshal in package util is deprecated: This class will be removed
+  println("Array(Array(1), Array(2))="+loadArray[Array[Int]](dump(Array(Array(1), Array(2)))))
+                                                             ^
+28 warnings found
 x=(), m=Unit
 x=true, m=Boolean
 x=a, m=Char

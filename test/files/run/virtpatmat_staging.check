@@ -1,1 +1,12 @@
+virtpatmat_staging.scala:12: warning: then is now a reserved word; usage as an identifier is deprecated
+   def guard[T](cond: Rep[Boolean], then: => Rep[T]): M[T]
+                                    ^
+virtpatmat_staging.scala:36: warning: then is now a reserved word; usage as an identifier is deprecated
+   def guard[T](cond: Rep[Boolean], then: => Rep[T]): M[T]          = "guard("+cond+","+then+")"
+                                    ^
+virtpatmat_staging.scala:36: warning: then is now a reserved word; usage as an identifier is deprecated
+   def guard[T](cond: Rep[Boolean], then: => Rep[T]): M[T]          = "guard("+cond+","+then+")"
+                                                                                        ^
+warning: there were 6 feature warnings; re-run with -feature for details
+four warnings found
 runOrElse(7, ?guard(false,?).flatMap(? =>one(foo)).orElse(one(bar)))

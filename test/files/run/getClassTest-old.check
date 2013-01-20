@@ -1,3 +1,7 @@
+getClassTest-old.scala:55: warning: method erasure in trait ClassManifestDeprecatedApis is deprecated: Use runtimeClass instead
+    manifest[T].erasure.getMethods.toList
+                ^
+one warning found
 f1: java.lang.Class<?>
 f2: java.lang.Class<?>
 f3: java.lang.Class<java.lang.Object>

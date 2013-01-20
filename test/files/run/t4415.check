@@ -1,0 +1,5 @@
+t4415.scala:42: warning: case classes without a parameter list have been deprecated;
+use either case objects or case classes with `()' as parameter list.
+case class MyPropImpl[T] extends MyProp[T]
+                        ^
+one warning found

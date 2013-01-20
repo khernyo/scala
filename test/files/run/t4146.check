@@ -1,0 +1,4 @@
+t4146.scala:1: warning: trait Application in package scala is deprecated: use App instead
+object bob extends Application {
+                   ^
+one warning found

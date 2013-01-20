@@ -1,3 +1,7 @@
+t2417.scala:11: warning: This catches all Throwables. If this is really intended, use `case x : Throwable` to clear this warning.
+            case x => failure = x
+                 ^
+one warning found
 testing small Map that doesn't promote to HashMap...
 
 testing single-threaded HashMap use...

@@ -1,3 +1,10 @@
+enums.scala:39: warning: constructor Enumeration in class Enumeration is deprecated: Names should be specified individually or discovered via reflection
+  object Direction extends Enumeration("North", "South", "East", "West") {
+                           ^
+enums.scala:51: warning: constructor Enumeration in class Enumeration is deprecated: Names should be specified individually or discovered via reflection
+  object Direction extends Enumeration("North", "South", "East", "West") {
+                           ^
+two warnings found
 test Test1 was successful
 test Test2 was successful
 test Test3 was successful

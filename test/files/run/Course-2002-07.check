@@ -1,3 +1,40 @@
+Course-2002-07.scala:19: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def leftOp: Expr = error("Number.leftOp");
+                       ^
+Course-2002-07.scala:20: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def rightOp: Expr = error("Number.rightOp");
+                        ^
+Course-2002-07.scala:25: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def numValue: Int = error("Sum.numValue");
+                        ^
+Course-2002-07.scala:33: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def numValue: Int = error("Prod.numValue");
+                        ^
+Course-2002-07.scala:41: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def numValue: Int = error("Var.numValue");
+                        ^
+Course-2002-07.scala:42: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def leftOp: Expr = error("Var.leftOp");
+                       ^
+Course-2002-07.scala:43: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    def rightOp: Expr = error("Var.rightOp");
+                        ^
+Course-2002-07.scala:49: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    else error("unknown expression")
+         ^
+Course-2002-07.scala:378: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case List() => error("no value for " + k)
+                   ^
+Course-2002-07.scala:413: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case Var(_) => error("cannot evaluate variable")
+                   ^
+Course-2002-07.scala:456: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case Pair(0,0) => error("power(0,0)")
+                      ^
+Course-2002-07.scala:466: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+    case List()                       => error("no value for " + key)
+                                         ^
+12 warnings found
         0 = 0
         1 = 1
     0 + 1 = 1

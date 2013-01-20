@@ -1,0 +1,40 @@
+main.scala:38: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+             ^
+main.scala:33: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  def evaluating[U](body: =>U) = new {
+      ^
+main.scala:34: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+    def shouldProduce[T <: Throwable: ClassManifest]() = {
+                                    ^
+main.scala:38: warning: method erasure in trait ClassManifestDeprecatedApis is deprecated: Use runtimeClass instead
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+                                                                 ^
+main.scala:38: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+                                               ^
+main.scala:40: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+        assert(produced, "Did not produce exception of type: " + implicitly[ClassManifest[T]])
+                                                                            ^
+warning: there were 119 feature warnings; re-run with -feature for details
+7 warnings found
+main.scala:38: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+             ^
+main.scala:33: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+  def evaluating[U](body: =>U) = new {
+      ^
+main.scala:34: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+    def shouldProduce[T <: Throwable: ClassManifest]() = {
+                                    ^
+main.scala:38: warning: method erasure in trait ClassManifestDeprecatedApis is deprecated: Use runtimeClass instead
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+                                                                 ^
+main.scala:38: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+        case e => if (e.getClass == implicitly[ClassManifest[T]].erasure) produced = true
+                                               ^
+main.scala:40: warning: type ClassManifest in object Predef is deprecated: Use scala.reflect.ClassTag instead
+        assert(produced, "Did not produce exception of type: " + implicitly[ClassManifest[T]])
+                                                                            ^
+warning: there were 119 feature warnings; re-run with -feature for details
+7 warnings found

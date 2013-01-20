@@ -1,3 +1,31 @@
+t6246.scala:6: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< tag)
+                ^
+t6246.scala:7: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< ClassTag.AnyVal)
+                ^
+t6246.scala:8: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< ClassTag.Any)
+                ^
+t6246.scala:9: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< ClassTag.Nothing)
+                ^
+t6246.scala:10: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(ClassTag.Nothing <:< tag)
+                             ^
+t6246.scala:11: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< ClassTag.Null)
+                ^
+t6246.scala:12: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(ClassTag.Null <:< tag)
+                          ^
+t6246.scala:13: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(tag <:< ClassTag.Object)
+                ^
+t6246.scala:14: warning: method <:< in trait ClassManifestDeprecatedApis is deprecated: Use scala.reflect.runtime.universe.TypeTag for subtype checking instead
+    println(ClassTag.Object <:< tag)
+                            ^
+9 warnings found
 runtimeClass = byte, toString = Byte
 true
 true

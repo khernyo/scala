@@ -208,6 +208,7 @@ class ConsoleFileManager extends FileManager {
       if (testFiles.nonEmpty) testFiles filter (_.parent isSame dir)
       else dir.list filterNot ignoreDir filter cond toList
 
-    ( if (failed) files filter (x => logFileExists(x, kind)) else files ) map (_.jfile)
+    val testContexts = files map { f => new TestContext(f.jfile, kind) }
+    ( if (failed) testContexts filter (_.logFileExists) else testContexts ) map (_.testFile)
   }
 }

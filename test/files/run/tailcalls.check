@@ -1,3 +1,7 @@
+tailcalls.scala:298: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+        if (n >= Int.MaxValue / 2) error("calibration failure");
+                                   ^
+one warning found
 test Object   .f was successful
 test Final    .f was successful
 test Class    .f raised exception java.lang.StackOverflowError

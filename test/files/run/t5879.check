@@ -1,3 +1,16 @@
+t5879.scala:21: warning: method merge in class HashMap is deprecated: Use the `merged` method instead.
+    val rold = a.merge(b)
+                 ^
+t5879.scala:38: warning: method merge in class HashMap is deprecated: Use the `merged` method instead.
+    val rold = a.merge(b, collision)
+                 ^
+t5879.scala:55: warning: method merge in class HashMap is deprecated: Use the `merged` method instead.
+    val rold = a.merge(b, collision)
+                 ^
+t5879.scala:70: warning: method merge in class HashMap is deprecated: Use the `merged` method instead.
+    val rold = a.merge(b, collision)
+                 ^
+four warnings found
 Map(1 -> 1)
 1
 Map(1 -> 1)

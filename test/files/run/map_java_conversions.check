@@ -1,0 +1,7 @@
+map_java_conversions.scala:22: warning: trait ConcurrentMap in package mutable is deprecated: Use `scala.collection.concurrent.Map` instead.
+    val cmap = asScalaConcurrentMap(concMap)
+        ^
+map_java_conversions.scala:22: warning: method asScalaConcurrentMap in trait WrapAsScala is deprecated: Use `mapAsScalaConcurrentMap` instead, and use `concurrent.Map` instead of `ConcurrentMap`.
+    val cmap = asScalaConcurrentMap(concMap)
+               ^
+two warnings found

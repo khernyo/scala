@@ -1,0 +1,7 @@
+t3855.scala:6: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    var n = try { s.toInt } catch { case _ => 1 }
+                                         ^
+t3855.scala:10: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    var n = try { s.toInt } catch { case _ => 1 }
+                                         ^
+two warnings found

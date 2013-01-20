@@ -1,3 +1,8 @@
+t5568.scala:12: warning: This lexical syntax is deprecated.  From scala 2.11, a dot will only be considered part of a number if it is immediately followed by a digit.
+    println(5.##)
+            ^
+warning: there were 1 feature warnings; re-run with -feature for details
+two warnings found
 void
 int
 class scala.runtime.BoxedUnit

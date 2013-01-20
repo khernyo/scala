@@ -1,3 +1,16 @@
+runtime.scala:174: warning: This catches all Throwables. If this is really intended, use `case exception : Throwable` to clear this warning.
+      case exception => {
+           ^
+runtime.scala:128: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+  class Foo { override def equals(that: Any) = error("abort"); }
+                                               ^
+runtime.scala:141: warning: comparing values of types Null and Null using `eq' will always yield true
+    check(true , null eq null, null ne null);
+                      ^
+runtime.scala:141: warning: comparing values of types Null and Null using `ne' will always yield false
+    check(true , null eq null, null ne null);
+                                    ^
+four warnings found
 <<< Test0
 [false,true]
 [0,1,2]

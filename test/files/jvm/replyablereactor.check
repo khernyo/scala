@@ -1,3 +1,13 @@
+replyablereactor.scala:3: warning: trait ReplyReactor in package actors is deprecated: Scala Actors are being removed from the standard library. Please refer to the migration guide.
+class MyActor extends ReplyReactor {
+                      ^
+replyablereactor.scala:26: warning: trait ReplyReactor in package actors is deprecated: Scala Actors are being removed from the standard library. Please refer to the migration guide.
+    val b = new ReplyReactor {
+        ^
+replyablereactor.scala:26: warning: trait ReplyReactor in package actors is deprecated: Scala Actors are being removed from the standard library. Please refer to the migration guide.
+    val b = new ReplyReactor {
+                ^
+three warnings found
 'hello
 'hello
 'hello

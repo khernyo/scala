@@ -1,0 +1,5 @@
+lists-run.scala:156: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => throw new Error("List.range(1, 10, 0)")
+           ^
+warning: there were 8 feature warnings; re-run with -feature for details
+two warnings found

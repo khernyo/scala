@@ -1,0 +1,7 @@
+scala-concurrent-tck.scala:422: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    f
+    ^
+scala-concurrent-tck.scala:724: warning: This catches all Throwables. If this is really intended, use `case t : Throwable` to clear this warning.
+      case t =>
+           ^
+two warnings found

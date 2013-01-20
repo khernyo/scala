@@ -1,2 +1,6 @@
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
 prefix = Expr[Nothing](Test.this.macros)
 it works

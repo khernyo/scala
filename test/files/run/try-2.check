@@ -1,3 +1,31 @@
+try-2.scala:15: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => Console.println("exception happened\n");
+           ^
+try-2.scala:22: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => error("Bad, bad, lama!");
+           ^
+try-2.scala:29: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => error("Bad, bad, lama!");
+           ^
+try-2.scala:36: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => Console.println("Nothin");
+           ^
+try-2.scala:41: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+      10;
+      ^
+try-2.scala:43: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+      case _ => Console.println("Huh?");
+           ^
+try-2.scala:50: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => ();
+         ^
+try-2.scala:22: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      case _ => error("Bad, bad, lama!");
+                ^
+try-2.scala:29: warning: method error in object Predef is deprecated: Use `sys.error(message)` instead
+      case _ => error("Bad, bad, lama!");
+                ^
+9 warnings found
 exception happened
 
 Nothin

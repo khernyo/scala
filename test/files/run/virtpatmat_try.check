@@ -1,2 +1,12 @@
+virtpatmat_try.scala:11: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => println("other")
+         ^
+virtpatmat_try.scala:20: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    case _ => println("other")
+         ^
+virtpatmat_try.scala:37: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    try { bla } catch { case _ => bla }
+                             ^
+three warnings found
 meh
 B

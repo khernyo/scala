@@ -1,0 +1,10 @@
+main.scala:40: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e => if (e.getClass == implicitly[ClassTag[T]].runtimeClass) produced = true
+             ^
+warning: there were 119 feature warnings; re-run with -feature for details
+two warnings found
+main.scala:40: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e => if (e.getClass == implicitly[ClassTag[T]].runtimeClass) produced = true
+             ^
+warning: there were 119 feature warnings; re-run with -feature for details
+two warnings found

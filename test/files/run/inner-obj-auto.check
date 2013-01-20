@@ -1,3 +1,199 @@
+inner-obj-auto.scala:28: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:57: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:86: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:115: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:144: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:173: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:202: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:231: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:260: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:289: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:318: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:347: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:376: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:405: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:434: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:463: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:492: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:521: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:551: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:582: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:613: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:644: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:675: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:706: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:736: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:765: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:794: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:823: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:852: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:881: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:910: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:939: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:968: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:997: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1026: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1055: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1084: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1113: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1142: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1175: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1208: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1241: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1274: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1307: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1340: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1373: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1406: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1439: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1472: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1505: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1538: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1571: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1604: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1637: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1670: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1703: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1736: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:1770: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1805: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1840: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1875: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1910: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1945: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+          case e =>  print("multi-threaded failed "); e.printStackTrace()
+               ^
+inner-obj-auto.scala:1979: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+inner-obj-auto.scala:2012: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
+        case e =>  print("multi-threaded failed "); e.printStackTrace()
+             ^
+65 warnings found
 ok
 ok
 ok

@@ -1,3 +1,7 @@
+bugs.scala:447: warning: This catches all Throwables. If this is really intended, use `case exception : Throwable` to clear this warning.
+      case exception =>
+           ^
+one warning found
 <<< bug 98
 mycase
 >>> bug 98

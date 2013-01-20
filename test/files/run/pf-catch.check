@@ -1,3 +1,8 @@
+pf-catch.scala:30: warning: This catches all Throwables. If this is really intended, use `case x : Throwable` to clear this warning.
+    catch { case x => println(shortName(x) + " slipped by.") }
+                 ^
+warning: there were 1 feature warnings; re-run with -feature for details
+two warnings found
 NoSuchElementException
 NullPointerException slipped by.
 NoSuchElementException

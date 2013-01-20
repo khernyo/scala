@@ -1,2 +1,6 @@
+t6329_vanilla.scala:2: warning: method classManifest in object Predef is deprecated: Use scala.reflect.classTag[T] instead
+  println(classManifest[List[_]])
+          ^
+one warning found
 scala.collection.immutable.List[Any]
 scala.collection.immutable.List

@@ -1,1 +1,5 @@
+t4080.scala:10: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+    catch { case _ => () }
+                 ^
+one warning found
 LinkedList(1, 0, 2, 3)

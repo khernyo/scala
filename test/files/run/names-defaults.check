@@ -1,3 +1,20 @@
+names-defaults.scala:266: warning: a pure expression does nothing in statement position; you may be omitting necessary parentheses
+    spawn(b = { val ttt = 1; ttt }, a = 0)
+                             ^
+names-defaults.scala:356: warning: the parameter name y has been deprecated. Use b instead.
+  deprNam1(y = 10, a = 1)
+             ^
+names-defaults.scala:357: warning: the parameter name x has been deprecated. Use a instead.
+  deprNam1(b = 2, x = 10)
+                    ^
+names-defaults.scala:366: warning: the parameter name s has been deprecated. Use x instead.
+  println(deprNam2.f(s = "dlf"))
+                       ^
+names-defaults.scala:368: warning: the parameter name x has been deprecated. Use s instead.
+  println(deprNam2.g(x = "sljkfd"))
+                       ^
+warning: there were 4 feature warnings; re-run with -feature for details
+6 warnings found
 1: @
 get: $
 get: 2

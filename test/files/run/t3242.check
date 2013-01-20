@@ -1,3 +1,5 @@
+warning: there were 1 feature warnings; re-run with -feature for details
+one warning found
  append [num: 200] vec
  remove [num: 200] vec
  append [num: 400] vec

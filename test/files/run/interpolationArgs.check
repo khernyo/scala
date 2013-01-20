@@ -1,2 +1,9 @@
+interpolationArgs.scala:2: warning: This catches all Throwables. If this is really intended, use `case ex : Throwable` to clear this warning.
+  try { scala.StringContext("p1", "p2", "p3").s("e1") } catch { case ex => println(ex) }
+                                                                     ^
+interpolationArgs.scala:3: warning: This catches all Throwables. If this is really intended, use `case ex : Throwable` to clear this warning.
+  try { scala.StringContext("p1").s("e1") } catch { case ex => println(ex) }
+                                                         ^
+two warnings found
 java.lang.IllegalArgumentException: wrong number of arguments for interpolated string
 java.lang.IllegalArgumentException: wrong number of arguments for interpolated string

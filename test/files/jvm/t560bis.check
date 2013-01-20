@@ -1,2 +1,6 @@
+t560bis.scala:9: warning: method apply in object Elem is deprecated: Use the other apply method in this object
+    Elem(null,"bla",Null, TopScope, (args map {x => Text(x)}):_*) match {
+    ^
+one warning found
 cool!
 cool!

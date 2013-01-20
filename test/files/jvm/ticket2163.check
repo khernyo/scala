@@ -1,0 +1,10 @@
+ticket2163.scala:5: warning: trait Application in package scala is deprecated: use App instead
+object Test extends Application {}
+                    ^
+warning: there were 2 feature warnings; re-run with -feature for details
+two warnings found
+ticket2163.scala:5: warning: trait Application in package scala is deprecated: use App instead
+object Test extends Application {}
+                    ^
+warning: there were 2 feature warnings; re-run with -feature for details
+two warnings found

@@ -1,3 +1,7 @@
+reify_this.scala:2: warning: imported `Eval' is permanently hidden by definition of trait Eval
+import scala.tools.reflect.Eval
+                           ^
+one warning found
 foo
 false
 2

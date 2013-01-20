@@ -1,1 +1,6 @@
+private-inline.scala:46: warning: This catches all Throwables. If this is really intended, use `case _ : Throwable` to clear this warning.
+        catch { case _ => null }
+                     ^
+warning: there were 4 inliner warnings; re-run with -Yinline-warnings for details
+two warnings found
 20

@@ -1,0 +1,4 @@
+t1505.scala:1: warning: constructor Enumeration in class Enumeration is deprecated: Names should be specified individually or discovered via reflection
+object P extends Enumeration(0, "A", "B", "C") { val A, B, C = Value }
+                 ^
+one warning found
