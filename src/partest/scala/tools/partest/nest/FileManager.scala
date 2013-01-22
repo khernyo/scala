@@ -82,6 +82,7 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
 
   val logFile = new File(dir, s"$fileBase-$kind.log")
   private def createLogStream = SFile(logFile).printStream()
+  private var createdLogFile = false
   private var logStream: Option[PrintStream] = None
   def log     = logStream.get  // FIXME Writing into this will never fail, not even after close(). Replace with something more bloody.
   val parent  = testFile.getParentFile
@@ -103,11 +104,14 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
 
   def createLogFile() {
     require(logStream.isEmpty)
+    require(!createdLogFile)
+    createdLogFile = true
     logStream = Some(createLogStream)
   }
 
   def closeLog() {
     require(logStream.isDefined)
+    require(createdLogFile)
     if (log.checkError()) NestUI.warning("There were errors with the log handling.\n")
 
     SFile.closeQuietly(log)
@@ -120,7 +124,7 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
     logStream = None
   }
 
-  def isLogClosed = logStream.isEmpty
+  def isLogClosed = createdLogFile && logStream.isEmpty
 
   def checkFile: File = ???
   def checkFileExists: Boolean = ???

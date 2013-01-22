@@ -789,6 +789,10 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
     def run(): (Boolean, LogContext) = {
       testContext.createLogFile()
       val result = try processSingleFile(testFile) catch { case t: Throwable => (false, crashContext(t)) }
+      if (!testContext.isLogClosed) {
+        NestUI.warning("Log file was not closed! If it's not closed, output was not checked either...")
+        testContext.closeLog()
+      }
       passed = Some(result._1)
       result
     }
