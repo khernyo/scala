@@ -77,7 +77,8 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
 
   def this(testFile: File, kind: String) = this(testFile, TestKind.withName(kind))
 
-  val dir: File = testFile.getParentFile
+  val parent  = testFile.getParentFile
+  val dir: File = parent
   val fileBase: String = basename(testFile.getName)
 
   val logFile = new File(dir, s"$fileBase-$kind.log")
@@ -85,7 +86,6 @@ class TestContext(val testFile: File, val kind: TestKind.Value) {
   private var createdLogFile = false
   private var logStream: Option[PrintStream] = None
   def log     = logStream.get  // FIXME Writing into this will never fail, not even after close(). Replace with something more bloody.
-  val parent  = testFile.getParentFile
   val outDir  = new File(parent, s"$fileBase-$kind.obj")
 
   def expectFailure = TestKind.expectsFailure(kind)
