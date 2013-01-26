@@ -90,6 +90,6 @@ ${JAVACMD:=java} \
   -Dscala.home="${SCALA_HOME}" \
   -Dpartest.javacmd="${JAVACMD}" \
   -Dpartest.java_opts="${JAVA_OPTS}" \
-  -Dpartest.scalac_opts="${SCALAC_OPTS}" \
+  -Dpartest.scalac_opts="-deprecation" \
   -Dpartest.javac_cmd="${JAVA_HOME}/bin/javac" \
   scala.tools.partest.nest.NestRunner "$@"
