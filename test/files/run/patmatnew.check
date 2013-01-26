@@ -10,5 +10,8 @@ patmatnew.scala:350: warning: a pure expression does nothing in statement positi
 patmatnew.scala:667: warning: This catches all Throwables. If this is really intended, use `case e : Throwable` to clear this warning.
             case e => {
                  ^
+patmatnew.scala:486: warning: unreachable code
+        case _ if false =>
+                        ^
 warning: there were 1 feature warnings; re-run with -feature for details
-5 warnings found
+6 warnings found
