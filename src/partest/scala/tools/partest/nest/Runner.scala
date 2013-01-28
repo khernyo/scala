@@ -366,7 +366,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
         case ""   => ""
         case s    => " " + s
       }
-      s"""scalac $fsString"""
+      s"""scalac${flags} $fsString"""
     }
     override def toString = description + ( if (result.isOk) "" else "\n" + result.status )
   }
