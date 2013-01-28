@@ -71,7 +71,7 @@ class DirectCompiler(val fileManager: FileManager) {
         prependToClasspaths(s, speclib)
 
       // have to catch bad flags somewhere
-      opts0.isEmpty || s.processArguments(opts, processAll = true)._1
+      opts0.isEmpty || command.ok
     }
 
     if (!defineSettings(testSettings))
