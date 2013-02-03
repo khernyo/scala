@@ -105,6 +105,7 @@ if [ ! -z "${PARTEST_DEBUG}" ] ; then
 fi
 
 "${JAVACMD:=java}" \
+  -XX:MaxPermSize=128m \
   $JAVA_OPTS \
   -cp "$EXT_CLASSPATH" \
   ${partestDebugStr} \
