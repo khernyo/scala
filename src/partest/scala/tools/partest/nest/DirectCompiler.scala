@@ -83,8 +83,10 @@ class DirectCompiler(val fileManager: FileManager) {
     vlog(s"% scalac $ids")
 
     def execCompile() = {
-      new global.Run compile sources.map(_.getPath)
-      if (!reporter.hasErrors) runner.genPass()
+      if (command.shouldStopWithInfo) logWriter append (command getInfoMessage global)
+      else new global.Run compile sources.map(_.getPath)
+
+      if (!reporter.hasErrors && !command.shouldStopWithInfo) runner.genPass()
       else {
         reporter.printSummary()
         reporter.writer.close()
