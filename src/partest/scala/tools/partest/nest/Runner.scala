@@ -363,7 +363,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
     def mkScalacString(): String = {
       val flags = file2String(flagsFile) match {
         case ""   => ""
-        case s    => " " + s
+        case s    => " " + s.trim
       }
       s"""scalac${flags} $fsString"""
     }
