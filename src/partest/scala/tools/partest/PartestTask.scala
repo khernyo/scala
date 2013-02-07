@@ -128,7 +128,6 @@ class PartestTask extends Task with CompilationPathProperty {
     val scalaCompiler        = findCp("compiler")
     val scalaPartest         = findCp("partest")
     val scalaActors          = findCp("actors")
-    val scalaActorsMigration = findCp("actors-migration")
     def scalacArgsFlat: Option[Seq[String]] = scalacArgs map (_ flatMap { a =>
       val parts = a.getParts
       if (parts eq null) Nil else parts.toSeq

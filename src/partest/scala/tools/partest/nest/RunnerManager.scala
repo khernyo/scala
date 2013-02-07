@@ -76,29 +76,6 @@ class RunnerManager(kind: String, val fileManager: FileManager, params: TestRunP
   import fileManager._
   fileManager.CLASSPATH += File.pathSeparator + PathSettings.scalaCheck
 
-  /** Runs command redirecting standard out and error out to output file.
-   *  Overloaded to accept a sequence of arguments.
-   */
-  private def runCommand(args: Seq[String], outFile: File): Boolean = {
-    NestUI.verbose("running command:\n"+args.map("  " + _ + "\n").mkString)
-    runCommandImpl(Process(args), outFile)
-  }
-
-  /** Runs command redirecting standard out and error out to output file.
-   *  Overloaded to accept a single string = concatenated command + arguments.
-   */
-  private def runCommand(command: String, outFile: File): Boolean = {
-    NestUI.verbose("running command:"+command)
-    runCommandImpl(Process(command), outFile)
-  }
-
-  private def runCommandImpl(process: => ProcessBuilder, outFile: File): Boolean = {
-    val exitCode = (process #> outFile !)
-    // normalize line endings
-    // System.getProperty("line.separator") should be "\n" here
-    // so reading a file and writing it back should convert all CRLFs to LFs
-    SFile(outFile).printlnAll(SFile(outFile).lines.toList: _*)
-    exitCode == 0
   def runTest(testFile: File): TestState = {
     val runner = new Runner(testFile, fileManager) {
       override def testRunParams = params
