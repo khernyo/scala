@@ -74,6 +74,10 @@ class Runner(val testFile: File, fileManager: FileManager) {
 
   lazy val outDir = { outFile.mkdirs() ; outFile }
 
+  lazy val globalFlags = readOptionsFile(flagsFile)
+
+  def readGroupFlags(f: SFile): List[String] = if (f.jfile != flagsFile) readOptionsFile(f) else Nil
+
   type RanOneTest = (Boolean, LogContext)
 
   def showCrashInfo(t: Throwable) {
@@ -346,8 +350,6 @@ class Runner(val testFile: File, fileManager: FileManager) {
 
   def newCompiler = new DirectCompiler(fileManager)
 
-  lazy val globalFlags = readOptionsFile(flagsFile)
-
   def attemptCompile(sources: List[File], flags: List[String]): TestState = {
     val state = newCompiler.compile(this, flags, sources)
     if (!state.isOk)
@@ -362,7 +364,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
     def description: String
 
     def groupFlags(ext: String): List[String] = fs match {
-      case first :: _ => Path(first changeExtension ext) ifFile (f => readOptionsFile(f.jfile)) getOrElse Nil
+      case first :: _ => Path(first changeExtension ext) ifFile (readGroupFlags) getOrElse Nil
       case Nil        => Nil
     }
 
