@@ -138,7 +138,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
     s.replaceAll(regex, "")
   }
 
-  def javac(files: List[File]): TestState = {
+  def javac(files: List[File], flags: List[String]): TestState = {
     // compile using command-line javac compiler
     val args = Seq(
       javacCmd,
@@ -146,7 +146,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
       outDir.getAbsolutePath,
       "-classpath",
       join(outDir.toString, CLASSPATH)
-    ) ++ files.map(_.getAbsolutePath)
+    ) ++ flags ++ files.map(_.getAbsolutePath)
 
     pushTranscript(args mkString " ")
     val captured = StreamCapture(runCommand(args, logFile))
@@ -346,8 +346,10 @@ class Runner(val testFile: File, fileManager: FileManager) {
 
   def newCompiler = new DirectCompiler(fileManager)
 
-  def attemptCompile(sources: List[File]): TestState = {
-    val state = newCompiler.compile(this, words(file2String(flagsFile)), sources)
+  lazy val globalFlags = readOptionsFile(flagsFile)
+
+  def attemptCompile(sources: List[File], flags: List[String]): TestState = {
+    val state = newCompiler.compile(this, flags, sources)
     if (!state.isOk)
       _transcript append ("\n" + file2String(logFile))
 
@@ -355,32 +357,33 @@ class Runner(val testFile: File, fileManager: FileManager) {
   }
   abstract class CompileRound {
     def fs: List[File]
-    def result: TestState
+    def flags: List[String]
+    def compile: TestState
     def description: String
 
-    def fsString = fs map (_.toString stripPrefix parentFile.toString + "/") mkString " "
-    def isOk = result.isOk
-    def mkScalacString(): String = {
-      val flags = file2String(flagsFile) match {
-        case ""   => ""
-        case s    => " " + s.trim
-      }
-      s"""scalac${flags} $fsString"""
+    def groupFlags(ext: String): List[String] = fs match {
+      case first :: _ => Path(first changeExtension ext) ifFile (f => readOptionsFile(f.jfile)) getOrElse Nil
+      case Nil        => Nil
     }
-    override def toString = description + ( if (result.isOk) "" else "\n" + result.status )
+
+    lazy val result: TestState = { pushTranscript(description) ; compile }
+    def flagsString            = if (flags.isEmpty) "" else " " + (flags mkString " ")
+    def fsString               = fs map (_.toString stripPrefix parentFile.toString + "/") mkString " "
+    def isOk                   = result.isOk
+    override def toString      = description + ( if (result.isOk) "" else "\n" + result.status )
+  }
+  abstract class ScalaCompileRound(fs: List[File]) extends CompileRound {
+    def description        = s"scalac$flagsString $fsString"
+    val flags              = globalFlags ::: groupFlags("flags")
+    def compile            = attemptCompile(fs, flags)
   }
   case class OnlyJava(fs: List[File]) extends CompileRound {
-    def description = s"""javac $fsString"""
-    lazy val result = { pushTranscript(description) ; javac(fs) }
+    def description        = s"javac$flagsString $fsString"
+    val flags              = groupFlags("javacopts")
+    def compile            = javac(fs, flags)
   }
-  case class OnlyScala(fs: List[File]) extends CompileRound {
-    def description = mkScalacString()
-    lazy val result = { pushTranscript(description) ; attemptCompile(fs) }
-  }
-  case class ScalaAndJava(fs: List[File]) extends CompileRound {
-    def description = mkScalacString()
-    lazy val result = { pushTranscript(description) ; attemptCompile(fs) }
-  }
+  case class OnlyScala(fs: List[File]) extends ScalaCompileRound(fs)
+  case class ScalaAndJava(fs: List[File]) extends ScalaCompileRound(fs)
 
   def compilationRounds(file: File): List[CompileRound] = {
     val grouped = if (file.isDirectory) groupedFiles(file) else List(List(file))
