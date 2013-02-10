@@ -49,9 +49,11 @@ class DirectCompiler(val fileManager: FileManager) {
   def compile(runner: Runner, opts0: List[String], sources: List[File]): TestState = {
     import runner._
 
+    val srcDir = if (testFile.isDirectory) Some(Directory(testFile)) else None
+
     val testSettings = new TestSettings(ClassPath.join(fileManager.LATEST_LIB, outDir.getPath))
     val logWriter    = new FileWriter(logFile)
-    val opts         = fileManager.updatePluginPath(opts0)
+    val opts         = fileManager.updatePluginPath(opts0, Directory(outDir), srcDir)
     val command      = new CompilerCommand(opts, testSettings)
     val global       = newGlobal(testSettings, logWriter)
     val reporter     = global.reporter.asInstanceOf[ExtConsoleReporter]

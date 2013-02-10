@@ -38,8 +38,14 @@ trait FileManager {
   def universalScalacOpts = SCALAC_OPTS
   def universalClasspath  = CLASSPATH
 
-  def updatePluginPath(options: List[String]): List[String] = {
-    def absolutize(path: String) = Path(path) match {
+  def updatePluginPath(options: List[String], outDir: Directory, srcDir: Option[Directory]): List[String] = {
+    def updateCwd(p: String) = {
+      if (p == ".") {
+        srcDir foreach { d => (d / "scalac-plugin.xml") ifFile (_ copyTo outDir) }
+        outDir
+      } else Path(p)
+    }
+    def absolutize(path: String) = updateCwd(path) match {
       case x if x.isAbsolute  => x.path
       case x                  => (testRootDir / x).toAbsolute.path
     }
