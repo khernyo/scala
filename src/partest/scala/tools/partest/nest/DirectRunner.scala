@@ -9,10 +9,7 @@ package scala.tools.partest
 package nest
 
 import java.io.File
-import scala.util.Properties.setProp
 import scala.tools.nsc.util.{ ScalaClassLoader, Exceptional }
-import scala.tools.nsc.io.Path
-import scala.collection.{ mutable, immutable }
 import java.util.concurrent._
 
 case class TestRunParams(val scalaCheckParentClassLoader: ScalaClassLoader)

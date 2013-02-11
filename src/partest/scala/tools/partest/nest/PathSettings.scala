@@ -5,8 +5,6 @@
 package scala.tools.partest
 package nest
 
-import scala.tools.nsc.Properties.{ setProp, propOrEmpty, propOrNone, propOrElse }
-
 object PathSettings {
   import PartestDefaults.{ testRootDir, srcDirName }
 

@@ -2,7 +2,7 @@ package scala.tools.partest
 package nest
 
 import java.io.File
-import scala.tools.nsc.io.{ Directory }
+import scala.tools.nsc.io.Directory
 import scala.util.Properties.setProp
 import scala.collection.JavaConverters._
 

@@ -8,12 +8,6 @@
 package scala.tools.partest
 package nest
 
-import java.io.{ FilenameFilter, IOException }
-import java.net.URI
-import scala.util.Properties.{ propOrElse, scalaCmd, scalacCmd }
-import scala.tools.nsc.{ io, util }
-import PathResolver.{ Environment, Defaults }
-
 class ConsoleFileManager extends FileManager {
   var testBuild: Option[String] = PartestDefaults.testBuild
   def testBuildFile = testBuild map (testParent / _)

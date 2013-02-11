@@ -6,12 +6,9 @@
 package scala.tools.partest
 package nest
 
-import scala.tools.nsc.{ Global, Settings, CompilerCommand, FatalError }
+import scala.tools.nsc.{ Global, Settings, CompilerCommand }
 import scala.tools.nsc.reporters.{ Reporter, ConsoleReporter }
-import scala.tools.nsc.util.{ FakePos, stackTraceString }
-import scala.tools.nsc.Properties.{ setProp, propOrEmpty }
-import scala.reflect.internal.util.Position
-import java.io.{ BufferedReader, PrintWriter, FileReader, Writer, FileWriter }
+import java.io.{ PrintWriter, FileWriter }
 
 class ExtConsoleReporter(settings: Settings, val writer: PrintWriter) extends ConsoleReporter(settings, Console.in, writer) {
   shortname = true

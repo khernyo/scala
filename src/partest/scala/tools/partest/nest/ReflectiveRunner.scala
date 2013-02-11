@@ -6,10 +6,9 @@
 package scala.tools.partest
 package nest
 
-import scala.tools.nsc.Properties.{ setProp, propOrEmpty }
+import scala.tools.nsc.Properties.setProp
 import scala.tools.nsc.util.ClassPath
 import scala.tools.nsc.io
-import io.Path
 import java.net.URLClassLoader
 
 /* This class is used to load an instance of DirectRunner using

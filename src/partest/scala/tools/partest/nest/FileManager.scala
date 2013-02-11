@@ -8,10 +8,7 @@
 package scala.tools.partest
 package nest
 
-import java.io.{ FilenameFilter, IOException,
-                FileInputStream, FileOutputStream, BufferedReader,
-                FileReader, PrintWriter, FileWriter}
-import java.net.URI
+import java.io.IOException
 import scala.collection.mutable
 
 trait FileManager {

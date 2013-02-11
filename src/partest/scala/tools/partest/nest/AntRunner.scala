@@ -11,7 +11,7 @@ package scala.tools.partest
 package nest
 
 import java.io.File
-import scala.tools.nsc.io.{ Directory }
+import scala.tools.nsc.io.Directory
 
 class AntRunner extends DirectRunner {
 

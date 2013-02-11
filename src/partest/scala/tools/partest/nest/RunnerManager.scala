@@ -7,20 +7,6 @@ package scala.tools.partest
 package nest
 
 import java.io._
-import java.net.URL
-import scala.tools.nsc.Properties.{ jdkHome, javaHome, propOrElse }
-import scala.util.Properties.{ envOrElse, isWin }
-import scala.tools.nsc.{ Settings, CompilerCommand, Global }
-import scala.tools.nsc.io.{ AbstractFile, PlainFile, Path, Directory, File => SFile }
-import scala.tools.nsc.reporters.ConsoleReporter
-import scala.tools.nsc.util.{ ClassPath, FakePos, ScalaClassLoader, stackTraceString }
-import ClassPath.{ join, split }
-import scala.tools.scalap.scalax.rules.scalasig.ByteCode
-import scala.collection.{ mutable, immutable }
-import scala.sys.process._
-import java.util.concurrent.{ Executors, TimeUnit, TimeoutException }
-import PartestDefaults.{ javaCmd, javacCmd }
-import scala.tools.scalap.Main.decompileScala
 
 class LogContext(val file: File, val writers: Option[(StringWriter, PrintWriter)])
 

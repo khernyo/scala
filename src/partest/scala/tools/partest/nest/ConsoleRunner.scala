@@ -10,7 +10,7 @@ package nest
 import utils.Properties._
 import scala.tools.nsc.Properties.{ versionMsg, setProp }
 import scala.tools.nsc.util.CommandLineParser
-import scala.collection.{ mutable, immutable }
+import scala.collection.mutable
 import PathSettings.srcDir
 import TestKinds._
 
