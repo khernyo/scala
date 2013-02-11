@@ -264,7 +264,6 @@ class Runner(val testFile: File, fileManager: FileManager) {
     if (chkFile("").isFile || suffix == "") chkFile("")
     else chkFile("-" + suffix)
   }
-  private def getCheckFile(dir: File) = Some(getCheckFilePath(dir, kind)) filter (_.canRead)
 
   def newTestWriters() = {
     val swr = new StringWriter
