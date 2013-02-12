@@ -56,7 +56,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
   def testRunParams: TestRunParams = ???
 
   private var _lastState: TestState = null
-  private var _transcript = new TestTranscript
+  private val _transcript = new TestTranscript
 
   def lastState                   = if (_lastState == null) TestState.Uninitialized(testFile) else _lastState
   def setLastState(s: TestState)  = _lastState = s
@@ -137,7 +137,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
       case _              => parentFile.getAbsolutePath
     }
     val base  = canonicalizeSlashes(base0 + '/')
-    var regex = """%s\Q%s\E""".format(if (isWin) "(?i)" else "", base)
+    val regex = """%s\Q%s\E""".format(if (isWin) "(?i)" else "", base)
 
     s.replaceAll(regex, "")
   }
