@@ -38,7 +38,7 @@ trait FileManager {
   def updatePluginPath(options: List[String], outDir: Directory, srcDir: Option[Directory]): List[String] = {
     def updateCwd(p: String) = {
       if (p == ".") {
-        srcDir foreach { d => (d / "scalac-plugin.xml") ifFile (_ copyTo outDir) }
+        srcDir foreach { d => (d / "scalac-plugin.xml") ifFile (copyFile(_, outDir)) }
         outDir
       } else Path(p)
     }

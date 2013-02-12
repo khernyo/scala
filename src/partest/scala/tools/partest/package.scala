@@ -68,14 +68,6 @@ package object partest {
 
     def fileContents: String    = try sf.slurp(scala.io.Codec.UTF8) catch { case _: java.io.FileNotFoundException => "" }
     def fileLines: List[String] = augmentString(fileContents).lines.toList
-
-    def copyTo(dest: SFile) {
-      dest writeAll fileContents
-    }
-
-    def copyTo(destDir: Directory) {
-      copyTo((destDir / sf.name).toFile)
-    }
   }
 
   implicit class PathOps(p: Path) extends FileOps(p.jfile) { }
