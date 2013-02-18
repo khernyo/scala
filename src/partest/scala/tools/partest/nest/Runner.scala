@@ -72,13 +72,13 @@ class Runner(val testFile: File, fileManager: FileManager) {
 
   lazy val outDir = { outFile.mkdirs() ; outFile }
 
-  def kindFlags = kind match {
+  def kindSpecificFlags = kind match {
     case "continuations-run" | "continuations-neg" =>
       List("-Xpluginsdir", SFile(fileManager.LATEST_CONTINUATIONS).parent.path, "-Xplugin-require:continuations", "-P:continuations:enable")
     case _ => Nil
   }
 
-  lazy val globalFlags = kindFlags ::: readOptionsFile(flagsFile)
+  lazy val globalFlags = kindSpecificFlags ::: readOptionsFile(flagsFile)
 
   def readGroupFlags(f: SFile): List[String] = if (f.jfile != flagsFile) readOptionsFile(f) else Nil
 
