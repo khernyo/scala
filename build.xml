@@ -472,8 +472,11 @@ INITIALISATION
     </path>
     <path id="partest.classpath">
       <path refid="pack.classpath"/>
-      <pathelement location="${pack.dir}/lib/scala-swing.jar"/>
+      <pathelement location="${build-pack.dir}/lib/scala-swing.jar"/>
       <fileset dir="${partest.dir}/files/lib" includes="*.jar" />
+    </path>
+    <path id="partest.pluginpath">
+      <fileset dir="${build-pack.dir}/misc/scala-devel/plugins" includes="*.jar" />
     </path>
 
     <!-- And print-out what we are building -->
@@ -2422,7 +2425,6 @@ BOOTRAPING TEST AND TEST SUITE
 
   <target name="test.continuations.suite">
     <antcall target="test.suite">
-      <param name="partest.scalacopts" value="${scalac.args.optimise} -Xpluginsdir ${build-quick.dir}/misc/scala-devel/plugins -Xplugin-require:continuations -P:continuations:enable" />
       <param name="partest.kinds" value="continuations-neg continuations-run"/>
     </antcall>
   </target>
@@ -2441,6 +2443,7 @@ BOOTRAPING TEST AND TEST SUITE
              colors="${partest.colors}"
              scalacopts="${partest.scalacopts}">
       <compilationpath refid="partest.classpath" />
+      <pluginpath refid="partest.pluginpath" />
     </partest>
   </target>
 

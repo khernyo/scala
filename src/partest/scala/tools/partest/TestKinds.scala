@@ -4,7 +4,7 @@ package partest
 import nest.PathSettings.srcDir
 
 object TestKinds {
-  val standardKinds = "pos neg run jvm res buildmanager scalacheck scalap specialized instrumented presentation ant" split "\\s+" toList
+  val standardKinds = "pos neg run jvm res buildmanager scalacheck scalap specialized instrumented presentation ant continuations-run continuations-neg" split "\\s+" toList
   val standardArgs  = standardKinds map ("--" + _)
 
   def denotesTestFile(p: Path) = p.isFile && p.hasExtension("scala", "res", "xml")

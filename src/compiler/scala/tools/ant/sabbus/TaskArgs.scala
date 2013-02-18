@@ -34,6 +34,26 @@ trait CompilationPathProperty {
   }
 }
 
+trait PluginPathProperty {
+  this: Task =>
+
+  protected var pluginPath: Option[Path] = None
+
+  def setPluginPath(input: Path) {
+    if (pluginPath.isEmpty) pluginPath = Some(input)
+    else pluginPath.get.append(input)
+  }
+
+  def createPluginPath: Path = {
+    if (pluginPath.isEmpty) pluginPath = Some(new Path(getProject))
+    pluginPath.get.createPath()
+  }
+
+  def setPluginPathRef(input: Reference) {
+    createPluginPath.setRefid(input)
+  }
+}
+
 trait TaskArgs extends CompilationPathProperty {
   this: Task =>
 

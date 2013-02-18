@@ -10,10 +10,9 @@ package scala.tools
 package partest
 
 import scala.util.Properties.setProp
-import scala.tools.ant.sabbus.CompilationPathProperty
-import java.lang.reflect.Method
+import scala.tools.ant.sabbus.{ PluginPathProperty, CompilationPathProperty }
 import org.apache.tools.ant.Task
-import org.apache.tools.ant.types.{ Reference, FileSet}
+import org.apache.tools.ant.types.Reference
 import org.apache.tools.ant.types.Commandline.Argument
 
 /** An Ant task to execute the Scala test suite (NSC).
@@ -34,7 +33,7 @@ import org.apache.tools.ant.types.Commandline.Argument
  *
  * @author Philippe Haller
  */
-class PartestTask extends Task with CompilationPathProperty {
+class PartestTask extends Task with CompilationPathProperty with PluginPathProperty {
   type Path = org.apache.tools.ant.types.Path
 
   private var kinds: List[String]               = Nil
@@ -44,7 +43,6 @@ class PartestTask extends Task with CompilationPathProperty {
   private var jUnitReportDir: Option[File]      = None
   private var javaccmd: Option[File]            = None
   private var javacmd: Option[File]             = Option(sys.props("java.home")) map (x => new File(x, "bin/java"))
-  private var runFailed: Boolean                = false
   private var scalacArgs: Option[Seq[Argument]] = None
   private var srcDir: Option[String]            = None
   private var colors: Int = 0
@@ -123,11 +121,19 @@ class PartestTask extends Task with CompilationPathProperty {
       || (f.absolutePathSegments endsWith Seq("classes", name))
     ) getOrElse sys.error(s"Provided classpath does not contain a Scala $name element.")
 
+    val pluginPath = this.pluginPath getOrElse sys.error("Mandatory attribute 'pluginPath' is not set.")
+    val pluginFiles = pluginPath.list map { fs => new File(fs) } toList
+    def findPlugin(name: String) = pluginFiles find (f =>
+           (f.absolutePathSegments endsWith Seq("plugins", s"$name.jar"))
+        || (f.absolutePathSegments endsWith Seq("classes", s"${name}-plugin"))
+      ) getOrElse sys.error(s"Provided pluginPath does not contain a Scala $name element.")
+
     val scalaLibrary         = findCp("library")
     val scalaReflect         = findCp("reflect")
     val scalaCompiler        = findCp("compiler")
     val scalaPartest         = findCp("partest")
     val scalaActors          = findCp("actors")
+    val scalaContinuations   = findPlugin("continuations")
     def scalacArgsFlat: Option[Seq[String]] = scalacArgs map (_ flatMap { a =>
       val parts = a.getParts
       if (parts eq null) Nil else parts.toSeq
@@ -143,6 +149,7 @@ class PartestTask extends Task with CompilationPathProperty {
     antFileManager.LATEST_COMP = scalaCompiler.getAbsolutePath
     antFileManager.LATEST_PARTEST = scalaPartest.getAbsolutePath
     antFileManager.LATEST_ACTORS = scalaActors.getAbsolutePath
+    antFileManager.LATEST_CONTINUATIONS = scalaContinuations.getAbsolutePath
 
     javacmd foreach (x => antFileManager.JAVACMD = x.getAbsolutePath)
     javaccmd foreach (x => antFileManager.JAVAC_CMD = x.getAbsolutePath)

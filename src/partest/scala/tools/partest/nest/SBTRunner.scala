@@ -9,16 +9,17 @@ import scala.collection.JavaConverters._
 object SBTRunner extends DirectRunner {
 
   val fileManager = new FileManager {
-    var JAVACMD: String        = "java"
-    var JAVAC_CMD: String      = "javac"
-    var CLASSPATH: String      = _
-    var LATEST_LIB: String     = _
-    var LATEST_REFLECT: String = _
-    var LATEST_COMP: String     = _
-    var LATEST_PARTEST: String     = _
-    var LATEST_ACTORS: String     = _
-    val testRootPath: String   = "test"
-    val testRootDir: Directory = Directory(testRootPath)
+    var JAVACMD: String              = "java"
+    var JAVAC_CMD: String            = "javac"
+    var CLASSPATH: String            = _
+    var LATEST_LIB: String           = _
+    var LATEST_REFLECT: String       = _
+    var LATEST_COMP: String          = _
+    var LATEST_PARTEST: String       = _
+    var LATEST_ACTORS: String        = _
+    var LATEST_CONTINUATIONS: String = _
+    val testRootPath: String         = "test"
+    val testRootDir: Directory       = Directory(testRootPath)
   }
 
   def reflectiveRunTestsForFiles(kindFiles: Array[File], kind: String): java.util.List[TestState] = {
@@ -49,17 +50,19 @@ object SBTRunner extends DirectRunner {
     fileManager.SCALAC_OPTS ++= config.scalacOptions
     fileManager.CLASSPATH = config.classpath getOrElse sys.error("No classpath set")
 
-    def findClasspath(jar: String, name: String): Option[String] = {
+    def findClasspath(jar: String, name: String): String = {
       val optJar = (fileManager.CLASSPATH split File.pathSeparator filter (_ matches (".*"+jar+".*\\.jar"))).headOption
       val optClassDir = (fileManager.CLASSPATH split File.pathSeparator filter (_ matches (".*"+name+File.separator+"classes"))).headOption
-      optJar orElse optClassDir
+      optJar orElse optClassDir getOrElse sys.error(s"No $jar found! Classpath = " + fileManager.CLASSPATH)
     }
+
     // Find scala library jar file...
-    fileManager.LATEST_LIB = findClasspath("scala-library", "scala-library") getOrElse sys.error("No scala-library found! Classpath = " + fileManager.CLASSPATH)
-    fileManager.LATEST_REFLECT = findClasspath("scala-reflect", "scala-reflect") getOrElse sys.error("No scala-reflect found! Classpath = " + fileManager.CLASSPATH)
-    fileManager.LATEST_COMP = findClasspath("scala-compiler", "scala-compiler") getOrElse sys.error("No scala-compiler found! Classpath = " + fileManager.CLASSPATH)
-    fileManager.LATEST_PARTEST = findClasspath("scala-partest", "partest") getOrElse sys.error("No scala-partest found! Classpath = " + fileManager.CLASSPATH)
-    fileManager.LATEST_ACTORS = findClasspath("scala-actors", "actors") getOrElse sys.error("No scala-actors found! Classpath = " + fileManager.CLASSPATH)
+    fileManager.LATEST_LIB = findClasspath("scala-library", "scala-library")
+    fileManager.LATEST_REFLECT = findClasspath("scala-reflect", "scala-reflect")
+    fileManager.LATEST_COMP = findClasspath("scala-compiler", "scala-compiler")
+    fileManager.LATEST_PARTEST = findClasspath("scala-partest", "partest")
+    fileManager.LATEST_ACTORS = findClasspath("scala-actors", "actors")
+    fileManager.LATEST_CONTINUATIONS = findClasspath("continuations", "continuations-plugin")
 
     // TODO - Do something useful here!!!
     fileManager.JAVAC_CMD = "javac"

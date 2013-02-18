@@ -68,57 +68,64 @@ class ConsoleFileManager extends FileManager {
       testClassesDir = Path(testClasses.get).toCanonical.toDirectory
       vlog("Running with classes in "+testClassesDir)
 
-      latestLibFile     = testClassesDir / "library"
-      latestActorsFile  = testClassesDir / "library" / "actors"
-      latestReflectFile = testClassesDir / "reflect"
-      latestCompFile    = testClassesDir / "compiler"
-      latestPartestFile = testClassesDir / "partest"
+      latestLibFile           = testClassesDir / "library"
+      latestActorsFile        = testClassesDir / "library" / "actors"
+      latestReflectFile       = testClassesDir / "reflect"
+      latestCompFile          = testClassesDir / "compiler"
+      latestPartestFile       = testClassesDir / "partest"
+      latestContinuationsFile = testClassesDir / "continuations-plugin"
     }
     else if (testBuild.isDefined) {
-      val dir = Path(testBuild.get)
+      val dir = Directory(testBuild.get)
       vlog("Running on "+dir)
-      latestLibFile     = dir / "lib/scala-library.jar"
-      latestActorsFile  = dir / "lib/scala-actors.jar"
-      latestReflectFile = dir / "lib/scala-reflect.jar"
-      latestCompFile    = dir / "lib/scala-compiler.jar"
-      latestPartestFile = dir / "lib/scala-partest.jar"
+
+      latestLibFile           = dir / "lib/scala-library.jar"
+      latestActorsFile        = dir / "lib/scala-actors.jar"
+      latestReflectFile       = dir / "lib/scala-reflect.jar"
+      latestCompFile          = dir / "lib/scala-compiler.jar"
+      latestPartestFile       = dir / "lib/scala-partest.jar"
+      latestContinuationsFile = dir / "misc/scala-devel/plugins/continuations.jar"
     }
     else {
       def setupQuick() {
         vlog("Running build/quick")
-        latestLibFile     = prefixFile("build/quick/classes/library")
-        latestActorsFile  = prefixFile("build/quick/classes/library/actors")
-        latestReflectFile = prefixFile("build/quick/classes/reflect")
-        latestCompFile    = prefixFile("build/quick/classes/compiler")
-        latestPartestFile = prefixFile("build/quick/classes/partest")
+        latestLibFile           = prefixFile("build/quick/classes/library")
+        latestActorsFile        = prefixFile("build/quick/classes/library/actors")
+        latestReflectFile       = prefixFile("build/quick/classes/reflect")
+        latestCompFile          = prefixFile("build/quick/classes/compiler")
+        latestPartestFile       = prefixFile("build/quick/classes/partest")
+        latestContinuationsFile = prefixFile("build/quick/classes/continuations-plugin")
       }
 
       def setupInst() {
         vlog("Running dist (installed)")
         val p = testParent.getParentFile
-        latestLibFile     = prefixFileWith(p, "lib/scala-library.jar")
-        latestActorsFile  = prefixFileWith(p, "lib/scala-actors.jar")
-        latestReflectFile = prefixFileWith(p, "lib/scala-reflect.jar")
-        latestCompFile    = prefixFileWith(p, "lib/scala-compiler.jar")
-        latestPartestFile = prefixFileWith(p, "lib/scala-partest.jar")
+        latestLibFile           = prefixFileWith(p, "lib/scala-library.jar")
+        latestActorsFile        = prefixFileWith(p, "lib/scala-actors.jar")
+        latestReflectFile       = prefixFileWith(p, "lib/scala-reflect.jar")
+        latestCompFile          = prefixFileWith(p, "lib/scala-compiler.jar")
+        latestPartestFile       = prefixFileWith(p, "lib/scala-partest.jar")
+        latestContinuationsFile = ???
       }
 
       def setupDist() {
         vlog("Running dists/latest")
-        latestLibFile     = prefixFile("dists/latest/lib/scala-library.jar")
-        latestActorsFile  = prefixFile("dists/latest/lib/scala-actors.jar")
-        latestReflectFile = prefixFile("dists/latest/lib/scala-reflect.jar")
-        latestCompFile    = prefixFile("dists/latest/lib/scala-compiler.jar")
-        latestPartestFile = prefixFile("dists/latest/lib/scala-partest.jar")
+        latestLibFile           = prefixFile("dists/latest/lib/scala-library.jar")
+        latestActorsFile        = prefixFile("dists/latest/lib/scala-actors.jar")
+        latestReflectFile       = prefixFile("dists/latest/lib/scala-reflect.jar")
+        latestCompFile          = prefixFile("dists/latest/lib/scala-compiler.jar")
+        latestPartestFile       = prefixFile("dists/latest/lib/scala-partest.jar")
+        latestContinuationsFile = prefixFile("dists/latest/misc/scala-devel/plugins/continuations.jar")
       }
 
       def setupPack() {
         vlog("Running build/pack")
-        latestLibFile     = prefixFile("build/pack/lib/scala-library.jar")
-        latestActorsFile  = prefixFile("build/pack/lib/scala-actors.jar")
-        latestReflectFile = prefixFile("build/pack/lib/scala-reflect.jar")
-        latestCompFile    = prefixFile("build/pack/lib/scala-compiler.jar")
-        latestPartestFile = prefixFile("build/pack/lib/scala-partest.jar")
+        latestLibFile           = prefixFile("build/pack/lib/scala-library.jar")
+        latestActorsFile        = prefixFile("build/pack/lib/scala-actors.jar")
+        latestReflectFile       = prefixFile("build/pack/lib/scala-reflect.jar")
+        latestCompFile          = prefixFile("build/pack/lib/scala-compiler.jar")
+        latestPartestFile       = prefixFile("build/pack/lib/scala-partest.jar")
+        latestContinuationsFile = prefixFile("build/pack/misc/scala-devel/plugins/continuations.jar")
       }
 
       def mostRecentOf(base: String, names: String*) =
@@ -146,6 +153,7 @@ class ConsoleFileManager extends FileManager {
     LATEST_COMP = latestCompFile.getAbsolutePath
     LATEST_PARTEST = latestPartestFile.getAbsolutePath
     LATEST_ACTORS = latestActorsFile.getAbsolutePath
+    LATEST_CONTINUATIONS = latestContinuationsFile.getAbsolutePath
   }
 
   var LATEST_LIB: String = ""
@@ -153,6 +161,7 @@ class ConsoleFileManager extends FileManager {
   var LATEST_COMP: String = ""
   var LATEST_PARTEST: String = ""
   var LATEST_ACTORS: String = ""
+  var LATEST_CONTINUATIONS: String = ""
 
   var latestLibFile: File = _
   var latestActorsFile: File = _
@@ -161,6 +170,7 @@ class ConsoleFileManager extends FileManager {
   var latestPartestFile: File = _
   def latestScalapFile: File = new File(latestLibFile.getParentFile, "scalap.jar")
   var testClassesDir: Directory = _
+  var latestContinuationsFile: File = _
   // initialize above fields
   findLatest()
 }

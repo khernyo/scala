@@ -2,18 +2,16 @@ package scala.tools.partest
 package nest
 
 import java.io._
-import java.net.URL
-import scala.tools.nsc.Properties.{ jdkHome, javaHome, propOrElse, propOrEmpty }
+import scala.tools.nsc.Properties.propOrEmpty
 import scala.util.Properties.{ envOrElse, isWin }
 import scala.tools.nsc.{ Settings, CompilerCommand, Global }
-import scala.tools.nsc.io.{ AbstractFile, PlainFile, Path, Directory, File => SFile }
+import scala.tools.nsc.io.{ Path, Directory, File => SFile }
 import scala.tools.nsc.reporters.ConsoleReporter
-import scala.tools.nsc.util.{ ClassPath, FakePos, ScalaClassLoader, stackTraceString }
-import ClassPath.{ join, split }
+import scala.tools.nsc.util.{ ClassPath, ScalaClassLoader, stackTraceString }
+import ClassPath.join
 import scala.tools.scalap.scalax.rules.scalasig.ByteCode
-import scala.collection.{ mutable, immutable }
+import scala.collection.mutable
 import scala.sys.process._
-import java.util.concurrent.{ Executors, TimeUnit, TimeoutException }
 import PartestDefaults.{ javaCmd, javacCmd }
 import scala.tools.scalap.Main.decompileScala
 
@@ -74,7 +72,13 @@ class Runner(val testFile: File, fileManager: FileManager) {
 
   lazy val outDir = { outFile.mkdirs() ; outFile }
 
-  lazy val globalFlags = readOptionsFile(flagsFile)
+  def kindFlags = kind match {
+    case "continuations-run" | "continuations-neg" =>
+      List("-Xpluginsdir", SFile(fileManager.LATEST_CONTINUATIONS).parent.path, "-Xplugin-require:continuations", "-P:continuations:enable")
+    case _ => Nil
+  }
+
+  lazy val globalFlags = kindFlags ::: readOptionsFile(flagsFile)
 
   def readGroupFlags(f: SFile): List[String] = if (f.jfile != flagsFile) readOptionsFile(f) else Nil
 
@@ -257,13 +261,6 @@ class Runner(val testFile: File, fileManager: FileManager) {
   }
 
   override def toString = s"""Test($testIdent, lastState = $lastState)"""
-
-  private def getCheckFilePath(dir: File, suffix: String) = {
-    def chkFile(s: String) = (Directory(dir) / "%s%s.check".format(fileBase, s)).toFile
-
-    if (chkFile("").isFile || suffix == "") chkFile("")
-    else chkFile("-" + suffix)
-  }
 
   def newTestWriters() = {
     val swr = new StringWriter

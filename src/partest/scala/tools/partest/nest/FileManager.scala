@@ -24,6 +24,7 @@ trait FileManager {
   var LATEST_COMP: String
   var LATEST_PARTEST: String
   var LATEST_ACTORS: String
+  var LATEST_CONTINUATIONS: String
 
   var updateCheck = false
   var failed = false
