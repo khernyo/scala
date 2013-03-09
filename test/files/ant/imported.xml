@@ -15,10 +15,8 @@ PROPERTIES
 
   <property file="${basedir}/build.properties"/>
 
-  <property name="build.dir" location="${source.dir}/${ant.project.name}-ant.obj"/>
-  <property name="log.dir" location="${source.dir}"/>
-  <property name="log.file" value="${log.dir}/${ant.project.name}-build-ant.log"/>
-  <property name="project.dir" value="../../.."/>
+  <property name="build.dir" location="${source.dir}/../${ant.project.name}-ant.obj"/>
+  <property name="project.dir" value="../../../.."/>
 
   <condition property="quick.binary">
     <equals arg1="${binary}" arg2="quick"/>
@@ -56,6 +54,7 @@ INITIALISATION
     <property name="scala.dir" value="${quick.dir}"/>
     <property name="scala-library.lib" value="${scala.dir}/classes/library/"/>
     <property name="scala-compiler.lib" value="${scala.dir}/classes/compiler/"/>
+    <property name="scala-reflect.lib" value="${scala.dir}/classes/reflect/"/>
   </target>
 
   <target name="pack.init" if="pack.binary">
@@ -66,6 +65,7 @@ INITIALISATION
     <property name="scala.dir" value="${pack.dir}"/>
     <property name="scala-library.lib" value="${scala.dir}/lib/scala-library.jar"/>
     <property name="scala-compiler.lib" value="${scala.dir}/lib/scala-compiler.jar"/>
+    <property name="scala-reflect.lib" value="${scala.dir}/lib/scala-reflect.jar"/>
   </target>
 
   <target name="latest.init" if="latest.binary">
@@ -76,6 +76,7 @@ INITIALISATION
     <property name="scala.dir" value="${latest.dir}"/>
     <property name="scala-library.lib" value="${scala.dir}/lib/scala-library.jar"/>
     <property name="scala-compiler.lib" value="${scala.dir}/lib/scala-compiler.jar"/>
+    <property name="scala-reflect.lib" value="${scala.dir}/lib/scala-reflect.jar"/>
   </target>
 
   <target name="installed.init" if="installed.binary">
@@ -86,6 +87,7 @@ INITIALISATION
     <property name="scala.dir" value="${installed.dir}"/>
     <property name="scala-library.lib" value="${scala.dir}/lib/scala-library.jar"/>
     <property name="scala-compiler.lib" value="${scala.dir}/lib/scala-compiler.jar"/>
+    <property name="scala-reflect.lib" value="${scala.dir}/lib/scala-reflect.jar"/>
   </target>
 
   <target name="init" depends="quick.init, pack.init, latest.init, installed.init">
@@ -94,9 +96,10 @@ INITIALISATION
     <path id="scala.classpath">
       <pathelement location="${scala-library.lib}"/>
       <pathelement location="${scala-compiler.lib}"/>
+      <pathelement location="${scala-reflect.lib}"/>
     </path>
 
-    <fail message="Scala library '${scala-library.lib}' or '${scala-compiler.lib}' is missing/broken">
+    <fail message="Scala library '${scala-library.lib}', '${scala-compiler.lib}' or '${scala-reflect.lib}' is missing/broken">
       <condition><not><and>
         <available classname="scala.Predef"
                    classpathref="scala.classpath"/>
@@ -108,7 +111,7 @@ INITIALISATION
                    classpathref="scala.classpath"/>
         <available classname="scala.tools.nsc.Main"
                    classpathref="scala.classpath"/>
-        <available classname="scala.tools.util.StringOps"
+        <available classname="scala.reflect.internal.util.StringOps"
                    classpathref="scala.classpath"/>
       </and></not></condition>
     </fail>
@@ -122,7 +125,6 @@ INITIALISATION
 
     <!-- make sure the log file exists when the Ant build scripts -->
     <!-- are run manually from the command prompt -->
-    <touch file="${log.file}"/>
   </target>
 
 <!-- ===========================================================================

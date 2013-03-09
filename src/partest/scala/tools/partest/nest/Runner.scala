@@ -135,7 +135,7 @@ class Runner(val testFile: File, fileManager: FileManager) {
   /** This does something about absolute paths and file separator
    *  chars before diffing.
    */
-  private def replaceSlashes(s: String): String = {
+  private def normalizePaths(s: String): String = {
     val base0 = kind match {
       case "buildmanager" => outDir.getAbsolutePath
       case _              => parentFile.getAbsolutePath
@@ -143,7 +143,20 @@ class Runner(val testFile: File, fileManager: FileManager) {
     val base  = canonicalizeSlashes(base0 + '/')
     val regex = """%s\Q%s\E""".format(if (isWin) "(?i)" else "", base)
 
-    s.replaceAll(regex, "")
+    // Maybe replace with "[...]/files/<kind>/" for all test kinds? That would help locating this place when the
+    // output is not what is should be... This would need an update for almost all the *.check files, though.
+    kind match {
+      case "ant" => s.replaceAll(regex, "[...]/files/ant/")
+      case _     => s.replaceAll(regex, "")
+    }
+  }
+
+  private def normalizeLogLine(line: String): String = {
+    val s = normalizePaths(line)
+    kind match {
+      case "ant" => s.replaceAll("""(Total time:) \d+ .*""", "$1 [scrubbed]")
+      case _     => s
+    }
   }
 
   def javac(files: List[File], flags: List[String]): TestState = {
@@ -294,9 +307,10 @@ class Runner(val testFile: File, fileManager: FileManager) {
     catch { case t: Exception => None }
   }
 
+  def normalizeLogInPlace(log: File) = log mapInPlace normalizeLogLine
+
   def diffIsOk: Boolean = {
-    logFile mapInPlace replaceSlashes
-    // fileManager.mapFile(logFile, replaceSlashes)
+    normalizeLogInPlace(logFile)
 
     val diff = currentDiff
     val ok: Boolean = (diff == "") || {
@@ -440,7 +454,8 @@ class Runner(val testFile: File, fileManager: FileManager) {
         else if (fileManager.LATEST_LIB endsWith "dists/latest/lib/scala-library.jar/") "latest"
         else "installed"
       )
-      val args = Array(binary, "-logfile", logFile.getPath, "-file", testFile.getPath)
+      val buildFile = Directory(testFile) / "build.xml"
+      val args = Array(binary, "-file", buildFile.getAbsolutePath)
       NestUI.verbose("ant "+args.mkString(" "))
 
       pushTranscript(s"ant ${args.mkString(" ")}")

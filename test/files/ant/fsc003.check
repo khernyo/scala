@@ -1,3 +1,4 @@
+Buildfile: [...]/files/ant/fsc003/build.xml
 
 quick.init:
 
@@ -12,3 +13,11 @@ init:
 build:
     [mkdir] Created dir: [...]/files/ant/fsc003-ant.obj
       [fsc] Compiling 1 source file to [...]/files/ant/fsc003-ant.obj
+
+clean:
+   [delete] Deleting directory [...]/files/ant/fsc003-ant.obj
+
+run:
+
+BUILD SUCCESSFUL
+Total time: [scrubbed]

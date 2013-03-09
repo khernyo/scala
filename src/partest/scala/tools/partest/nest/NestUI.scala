@@ -144,6 +144,7 @@ object NestUI {
     println("    --presentation       run presentation compiler tests")
     println("    --continuations-neg  run continuations plugin tests (failure)")
     println("    --continuations-run  run continuations plugin tests")
+    println("    --ant                run ant test")
     println
     println("  Other options:")
     println("    --pack       pick compiler/reflect/library in build/pack, and run all tests")

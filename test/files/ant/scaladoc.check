@@ -1,3 +1,4 @@
+Buildfile: [...]/files/ant/scaladoc/build.xml
 
 quick.init:
 
@@ -13,3 +14,11 @@ build:
     [mkdir] Created dir: [...]/files/ant/scaladoc-ant.obj
  [scaladoc] Documenting 1 source file to [...]/files/ant/scaladoc-ant.obj
  [scaladoc] model contains 3 documentable templates
+
+clean:
+   [delete] Deleting directory [...]/files/ant/scaladoc-ant.obj
+
+run:
+
+BUILD SUCCESSFUL
+Total time: [scrubbed]

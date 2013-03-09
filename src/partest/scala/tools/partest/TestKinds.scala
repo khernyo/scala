@@ -7,7 +7,7 @@ object TestKinds {
   val standardKinds = "pos neg run jvm res buildmanager scalacheck scalap specialized instrumented presentation ant continuations-run continuations-neg" split "\\s+" toList
   val standardArgs  = standardKinds map ("--" + _)
 
-  def denotesTestFile(p: Path) = p.isFile && p.hasExtension("scala", "res", "xml")
+  def denotesTestFile(p: Path) = p.isFile && p.hasExtension("scala", "res")
   def denotesTestDir(p: Path) = kindOf(p) match {
     case "res"  => false
     case _      => p.isDirectory && p.extension == ""

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="scalac004" default="run">
+<project name="scalac002" default="run">
 
-  <import file="${basedir}/imported.xml"/>
+  <import file="${basedir}/../imported.xml"/>
 
 <!-- ===========================================================================
 BUILD
@@ -11,15 +11,16 @@ BUILD
   <target name="build" depends="init">
     <echo level="verbose" message="build.dir=${build.dir}"/>
     <mkdir dir="${build.dir}"/>
+    <path id="source.ref">
+      <pathelement location="${source.dir}"/>
+    </path>
     <scalac
-      deprecation="yes" unchecked="yes"
-      srcdir="${source.dir}"
+      srcref="source.ref"
       includes="**/${ant.project.name}*.scala"
       destdir="${build.dir}"
       classpathref="build.classpath"
     />
     <echo level="verbose" message="log.file=${log.file}"/>
-    <replace file="${log.file}" token="${log.dir}" value="[...]/files/ant"/>
   </target>
 
 </project>

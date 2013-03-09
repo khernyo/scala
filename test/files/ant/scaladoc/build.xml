@@ -2,7 +2,7 @@
 
 <project name="scaladoc" default="run">
 
-  <import file="${basedir}/imported.xml"/>
+  <import file="${basedir}/../imported.xml"/>
 
 <!-- ===========================================================================
 BUILD
@@ -19,7 +19,6 @@ BUILD
       classpathref="build.classpath"
     />
     <echo level="verbose" message="log.file=${log.file}"/>
-    <replace file="${log.file}" token="${log.dir}" value="[...]/files/ant"/>
   </target>
 
 </project>
